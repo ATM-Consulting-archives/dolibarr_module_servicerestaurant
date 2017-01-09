@@ -192,3 +192,11 @@ values
 
 -- Fin création des tables
 
+-- Création d'un entrepot si aucun n'est créer
+
+insert into llx_entrepot(datec,tms,label,entity,description)
+select current_timestamp,current_timestamp,"E1",1,"Entrepot1"
+from DUAL
+where (select count(rowid) from llx_entrepot) =0
+
+-- Fin création d'entepot
