@@ -98,7 +98,7 @@ class modservicerestaurant extends DolibarrModules
 
 		// Dependencies
 		$this->hidden = false;			// A condition to hide module
-		$this->depends = array();		// List of modules id that must be enabled if this module is enabled
+		$this->depends = array("modCategorie","modCommande","modFacture","modStock","modProduct");		// List of modules id that must be enabled if this module is enabled
 		$this->requiredby = array();	// List of modules id to disable if this one is disabled
 		$this->conflictwith = array();	// List of modules id this module is in conflict with
 		$this->phpmin = array(5,0);					// Minimum version of PHP required by module
