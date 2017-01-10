@@ -64,3 +64,11 @@ function getsAllTables(){
 	return $tables;
 	
 }
+
+function showTables(){
+	$tables=getAllTables();
+	foreach ($tables as $tab){
+		echo"<input type='button' name='".$tab->name."' value='".$tab->name."'>";
+	}
+
+}
