@@ -196,7 +196,81 @@ values
 
 insert into llx_entrepot(datec,tms,label,entity,description)
 select current_timestamp,current_timestamp,"E1",1,"Entrepot1"
-from DUAL
-where (select count(rowid) from llx_entrepot) =0
+/*from DUAL
+where (select count(rowid) from llx_entrepot) =0*/;
 
 -- Fin création d'entepot
+
+-- Création produits et stocks
+
+insert into llx_categorie(entity,fk_parent,label,type,description,visible)
+values(1,0,"Entrees",0,"Les entrees du restaurant",0);
+insert into llx_categorie(entity,fk_parent,label,type,description,visible)
+values(1,0,"Plats",0,"Les plats du restaurant",0);
+insert into llx_categorie(entity,fk_parent,label,type,description,visible)
+values(1,0,"Desserts",0,"Les desserts du restaurant",0);
+
+insert into llx_product(ref,entity,datec,tms,stock,fk_parent,label,description,price,price_base_type,tosell,tobuy)
+values("E1",1,current_timestamp,current_timestamp,10,0,"Entree 1","L'entree numero 1 du  restaurant de test",10,"HT",1,1);
+insert into llx_categorie_product(fk_categorie,fk_product)
+values((select rowid from llx_categorie where label="Entrees"),(select rowid from llx_product where ref="E1"));
+insert into llx_product_stock(tms,fk_product,fk_entrepot,reel)
+values(current_timestamp,(select rowid from llx_product where ref="E1"),(select rowid from llx_entrepot where label="E1"),10);
+
+insert into llx_product(ref,entity,datec,tms,stock,fk_parent,label,description,price,price_base_type,tosell,tobuy)
+values("E2",1,current_timestamp,current_timestamp,10,0,"Entree 2","L'entree numero 2 du  restaurant de test",10,"HT",1,1);
+insert into llx_categorie_product(fk_categorie,fk_product)
+values((select rowid from llx_categorie where label="Entrees"),(select rowid from llx_product where ref="E2"));
+insert into llx_product_stock(tms,fk_product,fk_entrepot,reel)
+values(current_timestamp,(select rowid from llx_product where ref="E2"),(select rowid from llx_entrepot where label="E1"),10);
+
+insert into llx_product(ref,entity,datec,tms,stock,fk_parent,label,description,price,price_base_type,tosell,tobuy)
+values("E3",1,current_timestamp,current_timestamp,10,0,"Entree 3","L'entree numero 3 du  restaurant de test",10,"HT",1,1);
+insert into llx_categorie_product(fk_categorie,fk_product)
+values((select rowid from llx_categorie where label="Entrees"),(select rowid from llx_product where ref="E3"));
+insert into llx_product_stock(tms,fk_product,fk_entrepot,reel)
+values(current_timestamp,(select rowid from llx_product where ref="E3"),(select rowid from llx_entrepot where label="E1"),10);
+
+
+insert into llx_product(ref,entity,datec,tms,stock,fk_parent,label,description,price,price_base_type,tosell,tobuy)
+values("P1",1,current_timestamp,current_timestamp,10,0,"Plat 1","Le plat numero 1 du  restaurant de test",10,"HT",1,1);
+insert into llx_categorie_product(fk_categorie,fk_product)
+values((select rowid from llx_categorie where label="Plats"),(select rowid from llx_product where ref="P1"));
+insert into llx_product_stock(tms,fk_product,fk_entrepot,reel)
+values(current_timestamp,(select rowid from llx_product where ref="P1"),(select rowid from llx_entrepot where label="E1"),10);
+
+insert into llx_product(ref,entity,datec,tms,stock,fk_parent,label,description,price,price_base_type,tosell,tobuy)
+values("P2",1,current_timestamp,current_timestamp,10,0,"Plat 2","Le plat numero 2 du  restaurant de test",10,"HT",1,1);
+insert into llx_categorie_product(fk_categorie,fk_product)
+values((select rowid from llx_categorie where label="Plats"),(select rowid from llx_product where ref="P2"));
+insert into llx_product_stock(tms,fk_product,fk_entrepot,reel)
+values(current_timestamp,(select rowid from llx_product where ref="P2"),(select rowid from llx_entrepot where label="E1"),10);
+
+insert into llx_product(ref,entity,datec,tms,stock,fk_parent,label,description,price,price_base_type,tosell,tobuy)
+values("P3",1,current_timestamp,current_timestamp,10,0,"Plat 3","Le plat numero 3 du  restaurant de test",10,"HT",1,1);
+insert into llx_categorie_product(fk_categorie,fk_product)
+values((select rowid from llx_categorie where label="Plats"),(select rowid from llx_product where ref="P3"));
+insert into llx_product_stock(tms,fk_product,fk_entrepot,reel)
+values(current_timestamp,(select rowid from llx_product where ref="P3"),(select rowid from llx_entrepot where label="E1"),10);
+
+
+insert into llx_product(ref,entity,datec,tms,stock,fk_parent,label,description,price,price_base_type,tosell,tobuy)
+values("D1",1,current_timestamp,current_timestamp,10,0,"Dessert 1","Le dessert numero 1 du  restaurant de test",10,"HT",1,1);
+insert into llx_categorie_product(fk_categorie,fk_product)
+values((select rowid from llx_categorie where label="Desserts"),(select rowid from llx_product where ref="D1"));
+insert into llx_product_stock(tms,fk_product,fk_entrepot,reel)
+values(current_timestamp,(select rowid from llx_product where ref="D1"),(select rowid from llx_entrepot where label="E1"),10);
+
+insert into llx_product(ref,entity,datec,tms,stock,fk_parent,label,description,price,price_base_type,tosell,tobuy)
+values("D2",1,current_timestamp,current_timestamp,10,0,"Dessert 2","Le dessert numero 2 du  restaurant de test",10,"HT",1,1);
+insert into llx_categorie_product(fk_categorie,fk_product)
+values((select rowid from llx_categorie where label="Desserts"),(select rowid from llx_product where ref="D2"));
+insert into llx_product_stock(tms,fk_product,fk_entrepot,reel)
+values(current_timestamp,(select rowid from llx_product where ref="D2"),(select rowid from llx_entrepot where label="E1"),10);
+
+insert into llx_product(ref,entity,datec,tms,stock,fk_parent,label,description,price,price_base_type,tosell,tobuy)
+values("D3",1,current_timestamp,current_timestamp,10,0,"Dessert 3","Le dessert numero 3 du  restaurant de test",10,"HT",1,1);
+insert into llx_categorie_product(fk_categorie,fk_product)
+values((select rowid from llx_categorie where label="Desserts"),(select rowid from llx_product where ref="D3"));
+insert into llx_product_stock(tms,fk_product,fk_entrepot,reel)
+values(current_timestamp,(select rowid from llx_product where ref="D3"),(select rowid from llx_entrepot where label="E1"),10);
