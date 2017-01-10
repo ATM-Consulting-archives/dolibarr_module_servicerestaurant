@@ -53,3 +53,14 @@ function servicerestaurantAdminPrepareHead()
 
     return $head;
 }
+
+/**
+ * @return all the tables in an array
+ */
+require_once '/societe/class/api_contact.class.php';
+function getsAllTables(){
+	$tables=getList();
+	
+	return $tables;
+	
+}
