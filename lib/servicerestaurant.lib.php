@@ -24,7 +24,8 @@
  */
 
 
-require_once '/societe/class/api_contact.class.php';
+dol_include_once('class/api_contact.class.php');
+dol_include_once('class/api_commande.class.php');
 
 function servicerestaurantAdminPrepareHead()
 {
@@ -74,4 +75,10 @@ function showTables(){
 		echo"<input type='button' name='".$tab->name."' value='".$tab->name."' onclick='".Order()."' >";
 	}
 
+	
+	
+function validateOrder($id){
+	validOrder($id);
+	
+}
 }
