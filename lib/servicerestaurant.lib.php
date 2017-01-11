@@ -23,6 +23,9 @@
  *				Put some comments here
  */
 
+
+require_once '/societe/class/api_contact.class.php';
+
 function servicerestaurantAdminPrepareHead()
 {
     global $langs, $conf;
@@ -57,7 +60,7 @@ function servicerestaurantAdminPrepareHead()
 /**
  * @return all the tables in an array
  */
-require_once '/societe/class/api_contact.class.php';
+
 function getsAllTables(){
 	$tables=getList();
 	
