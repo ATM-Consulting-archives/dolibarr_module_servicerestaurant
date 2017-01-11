@@ -56,28 +56,30 @@ class ControllerServiceRestaurant
     
         function test_game()
         {
-            $this->newUserGroup($this->db);        
-            $this->newUser($this->db);
+            $id_group=$this->TestGameUserAndUsergroup($this->db); 
         }
 
-        function newUser($db)
+        function TestGameUserAndUsergroup($db)
         {
+            $usergroup= new UserGroup($db);
+            $usergroup->name="Serveurs";
+            $usergroup->entity=1;
+            $usergroup->note="Les serveurs du restaurant";
+            $id_group=$usergroup->create();
+            
+            $Ids_right=array(11,12,31,81,82,87,121,122,21,342,343,1001);
+            foreach ($Ids_right as $id_right)
+            {
+                $usergroup->addrights($id_right);
+            }
+            
             $user=new User($db);
             $user->login="Serveur1";
             $user->lastname="serveur";
             $user->firstname="test";
             $user->entity=1;
             $user->pass="";
-            //$user->egroupware_id=   request to usergroup
             $user->create($user);
-        }
-
-        function newUsergroup($db)
-        {
-            $usergroup= new UserGroup($db);
-            $usergroup->name="Serveurs";
-            $usergroup->entity=1;
-            $usergroup->note="Les serveurs du restaurant";
-            $usergroup->create();
+            $user->SetInGroup($id_group,1);
         }
 }
