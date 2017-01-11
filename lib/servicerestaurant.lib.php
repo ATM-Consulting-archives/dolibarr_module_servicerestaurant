@@ -23,6 +23,9 @@
  *				Put some comments here
  */
 
+
+require_once '/societe/class/api_contact.class.php';
+
 function servicerestaurantAdminPrepareHead()
 {
     global $langs, $conf;
@@ -52,4 +55,23 @@ function servicerestaurantAdminPrepareHead()
     complete_head_from_modules($conf, $langs, $object, $head, $h, 'servicerestaurant');
 
     return $head;
+}
+
+/**
+ * @return all the tables in an array
+ */
+
+function getsAllTables(){
+	$tables=getList();
+	
+	return $tables;
+	
+}
+
+function showTables(){
+	$tables=getAllTables();
+	foreach ($tables as $tab){
+		echo"<input type='button' name='".$tab->name."' value='".$tab->name."' onclick='".Order()."' >";
+	}
+
 }
