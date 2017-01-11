@@ -6,4 +6,5 @@
  * and open the template in the editor.
  */
  echo "Bienvenu sur le plan de table";
+ echo"<br><a href='saisieCommande.php'>Saisie de commande</a>";
 ?>

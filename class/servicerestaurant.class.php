@@ -10,6 +10,7 @@ dol_include_once("/categories/class/categories.class.php");
 dol_include_once("/user/class/user.class.php");
 dol_include_once("/societe/class/client.class.php");
 dol_include_once("/product/class/product.class.php");
+dol_include_once("/user/class/usergroup.class.php");
 /**
  * Description of servicerestaurant
  *
@@ -17,20 +18,32 @@ dol_include_once("/product/class/product.class.php");
  */
 class Servicerestaurant {
     
-    
+    private $db;
+    private $langs;
+    private $conf;
     
     /**
      *	Constructor
      *
      *  @param		DoliDB		$db      Database handler
      */
-    function __construct()
+    function __construct($db)
     {
-        global $langs, $conf, $db;
+        global $langs, $conf;
         $this->db = $db;
 
         $this->langs=$lang;
         $this->conf=$conf;
 
+    }
+    
+    function jeu_essai()
+    {
+        global $db;
+        $usergroup= new UserGroup($db);
+        $usergroup->name="Serveurs";
+        $usergroup->entity=1;
+        $usergroup->note="Les serveurs du restaurant";
+        $usergroup->create();
     }
 }
