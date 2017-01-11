@@ -54,30 +54,30 @@ class ControllerServiceRestaurant
 		
 	}
     
-    function test_game()
-    {
-        newUserGroup($db);        
-        newUser($db);
-    }
-    
-    function newUser($db)
-    {
-        $user=new User($db);
-        $user->login="Serveur1";
-        $user->lastname="serveur";
-        $user->firstname="test";
-        $user->entity=1;
-        $user->pass="";
-        //$user->egroupware_id=   request to usergroup
-        $user->create($user);
-    }
-    
-    function newUsergroup($db)
-    {
-        $usergroup= new UserGroup($db);
-        $usergroup->name="Serveurs";
-        $usergroup->entity=1;
-        $usergroup->note="Les serveurs du restaurant";
-        $usergroup->create();
-    }
-}
+        function test_game()
+        {
+            $this->newUserGroup($this->db);        
+            $this->newUser($this->db);
+        }
+
+        function newUser($db)
+        {
+            $user=new User($db);
+            $user->login="Serveur1";
+            $user->lastname="serveur";
+            $user->firstname="test";
+            $user->entity=1;
+            $user->pass="";
+            //$user->egroupware_id=   request to usergroup
+            $user->create($user);
+        }
+
+        function newUsergroup($db)
+        {
+            $usergroup= new UserGroup($db);
+            $usergroup->name="Serveurs";
+            $usergroup->entity=1;
+            $usergroup->note="Les serveurs du restaurant";
+            $usergroup->create();
+        }
+}
