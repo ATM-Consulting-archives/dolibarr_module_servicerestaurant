@@ -14,4 +14,4 @@ echo "Bienvenu sur la saisie de commande";
 global $db;
 
 $servicerestaurant= new Servicerestaurant($db);
-$servicerestaurant->jeu_essai();
+$servicerestaurant->test_game();

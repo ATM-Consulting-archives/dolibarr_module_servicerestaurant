@@ -37,9 +37,27 @@ class Servicerestaurant {
 
     }
     
-    function jeu_essai()
+    function test_game()
     {
         global $db;
+        newUserGroup($db);        
+        newUser($db);
+    }
+    
+    function newUser($db)
+    {
+        $user=new User($db);
+        $user->login="Serveur1";
+        $user->lastname="serveur";
+        $user->firstname="test";
+        $user->entity=1;
+        $user->pass="";
+        //$user->egroupware_id=   request to usergroup
+        $user->create($user);
+    }
+    
+    function newUsergroup($db)
+    {
         $usergroup= new UserGroup($db);
         $usergroup->name="Serveurs";
         $usergroup->entity=1;
