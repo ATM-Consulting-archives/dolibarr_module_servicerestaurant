@@ -13,5 +13,5 @@ dol_include_once("/dolibarr_module_servicerestaurant/class/servicerestaurant.cla
 echo "Bienvenu sur la saisie de commande";
 global $db,$conf;
 
-$servicerestaurant= new ControllerServiceRestaurant($db,$confs,$user);
-$servicerestaurant->test_game();
+$servicerestaurant= new ControllerServiceRestaurant($db,$confs,$user); 
+$servicerestaurant->init_test_game();

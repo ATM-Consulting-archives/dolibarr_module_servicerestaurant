@@ -54,6 +54,16 @@ class ControllerServiceRestaurant
 		// TODO generate order
 		
 	}
+        
+        function init_test_game()
+        {
+            $usergroup= new UserGroup($this->db);
+            $usergroupTest=$usergroup->fetch('',"Serveurs");
+            if($usergroupTest<0)
+            {
+                $this->test_game();
+            }
+        }
     
         function test_game()
         {
@@ -61,7 +71,7 @@ class ControllerServiceRestaurant
             $admin->fetch(1);
             $this->TestGameUserAndUsergroup($this->db,$admin);
             $this->TestGameSocieteAndCategories($this->db,$admin);
-            $this->TestGameProductAndCategorie($this->db,$admin);
+            $this->TestGameProductAndCategories($this->db,$admin);
         }
 
         function TestGameUserAndUsergroup($db,$admin)
@@ -109,7 +119,7 @@ class ControllerServiceRestaurant
             }
         }
         
-        function TestGameProductAndCategorie($db,$admin)
+        function TestGameProductAndCategories($db,$admin)
         {
             $entrepot=new Entrepot($db);
             $entrepot->libelle="E1";
