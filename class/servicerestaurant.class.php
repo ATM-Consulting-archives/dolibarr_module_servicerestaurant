@@ -17,6 +17,7 @@ class ControllerServiceRestaurant
 	public $conf;
 	public $user;
 	
+	
 	/**
 	 *	Constructor
 	 * 
