@@ -77,7 +77,49 @@ function showTables(){
 	}
 
 }
+
 function validateOrder($id){
 	validOrder($id);
 
 }
+/**
+ * @param $idcommande idof order
+ */
+function addProduct($idord, $idproduct){
+	if(!getLines($idord)){
+		post($idord);
+	}
+	if(!getLine($idord,$idproduct)){
+	postLine($idord, $idproduct);}
+	else{
+		$prod=get($idord,$idproduct);
+		$prod->qty=$prod->qty+1;
+		putLine($idord,$idproduct,$prod);
+	}
+}
+
+function removeProduct($idord,$idprod){
+	if(getLine($idord,$idprod)){
+		$product=getLine($idord,$idprod);
+		if($product->qty>1){
+			$product->qty=$product->qty-1;
+			putLine($idord,$idproduct,$product);
+			return $product->qty;
+		}
+		else{delLine($idord,$idprod);
+		}
+	}
+	return 0;
+}
+
+/**
+ * to add a line use: dol_include_once('class/api_commande.class.php'); use function postLine($idcommande)
+ */
+	
+/**
+ * to remove a line use function delLine($idcommande,$idLine);
+ */
+ 
+/**
+ * to modify a quantity use postLine($idcommande, $newquantity);
+ */
