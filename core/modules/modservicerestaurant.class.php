@@ -253,7 +253,11 @@ class modservicerestaurant extends DolibarrModules
 
 		dol_include_once('/servicerestaurant/config.php');
 		dol_include_once('/servicerestaurant/script/create-maj-base.php');
-
+                
+                dol_include_once("/dolibarr_module_servicerestaurant/class/servicerestaurant.class.php");
+                //$servicerestaurant= new ControllerServiceRestaurant($db,$conf,$user); 
+                //$servicerestaurant->init_test_game();
+                
 		$result=$this->_load_tables('/servicerestaurant/sql/');
 
 		return $this->_init($sql, $options);

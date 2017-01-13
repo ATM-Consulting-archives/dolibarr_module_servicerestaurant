@@ -60,7 +60,7 @@ class ControllerServiceRestaurant
         {
             $usergroup= new UserGroup($this->db);
             $usergroupTest=$usergroup->fetch('',"Serveurs");
-            if($usergroupTest<0)
+            if(!isset($usergroup->nom) && $usergroup->nom !="Serveurs")
             {
                 $this->test_game();
             }
@@ -71,8 +71,8 @@ class ControllerServiceRestaurant
             $admin=new User($this->db);
             $admin->fetch(1);
             $this->TestGameUserAndUsergroup($this->db,$admin);
-            $this->TestGameSocieteAndCategories($this->db,$admin);
-            $this->TestGameProductAndCategories($this->db,$admin);
+            //$this->TestGameSocieteAndCategories($this->db,$admin);
+            //$this->TestGameProductAndCategories($this->db,$admin);
         }
 
         function TestGameUserAndUsergroup($db,$admin)
