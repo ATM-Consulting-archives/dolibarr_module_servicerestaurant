@@ -50,11 +50,31 @@ class ControllerServiceRestaurant
 	 * 
 	 * @return	int		(0 = error, 1 = OK)
 	 */
-	function generate_order($table_id) {
-		$commande = new Commande($this->db);
-		// TODO generate order
-		
+	function generate_order($table_id) 
+        {
+            $commande = new Commande($this->db);
+            $Tid_OrderBySociete=$this->getAllCommandesInvalidBySociete($this->db,$table_id);
+            if(sizeof($Tid_OrderBySociete)>0)
+            {
+                return 0;
+            }
+            else
+            {
+                echo "OK";
+            }
 	}
+        
+        function getAllCommandesInvalidBySociete($db,$table_id)
+        {
+            $sql="Select rowid from ".MAIN_DB_PREFIX."commande where fk_soc= $table_id and fk_user_valid is not null order by date_creation DESC;";
+            $stmt=$this->db->query($sql); 
+            $Tid_order;
+            foreach($stmt as $row)
+            {
+                $Tid_order[]=$row['rowid'];
+            }
+            return $Tid_order;
+        }
         
         function init_test_game()
         {
@@ -126,6 +146,8 @@ class ControllerServiceRestaurant
             $entrepot->libelle="E1";
             $entrepot->description="Entrepot 1";
             $entrepot->statut=1;
+            $entrepot->tosell=1;
+            $entrepot->tobuy=1;
             $entrepot->country_id=1;
             $id_entrepot=$entrepot->create($admin);
             
