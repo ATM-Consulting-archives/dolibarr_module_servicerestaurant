@@ -14,4 +14,11 @@ echo "Bienvenu sur la saisie de commande";
 global $db,$conf;
 
 $servicerestaurant= new ControllerServiceRestaurant($db,$confs,$user); 
-$servicerestaurant->generate_order(1);
+$categ=$servicerestaurant->getAllProductsCategories();
+print_r($categ);
+foreach($categ as $cat)
+{
+    $categorie=new Categorie($db);
+    $categorie->fetch($cat);
+    echo $categorie->label;
+}

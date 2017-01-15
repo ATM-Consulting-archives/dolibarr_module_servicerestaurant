@@ -54,19 +54,30 @@ class ControllerServiceRestaurant
         {
             $commande = new Commande($this->db);
             $Tid_OrderBySociete=$this->getAllCommandesInvalidBySociete($this->db,$table_id);
-            if(sizeof($Tid_OrderBySociete)>0)
+            if(sizeof($Tid_OrderBySociete)==0)
             {
-                return 0;
+                $commande->socid=$table_id;
+                $commande->create($this->user);
+                return 1;
             }
             else
             {
-                echo "OK";
+                echo "Une commande est déjà en cour de saisie sur cette table. ";
+                return 0;
             }
 	}
         
+        /**
+	 *	Function getAllCommandesInvalidBySociete
+         * @param       $db             Database
+	 * @param   	$table_id	Societe		Dolibarr Societe Object
+         *              
+	 * 
+	 * @return	array() with all rowid of invalid order 
+	 */
         function getAllCommandesInvalidBySociete($db,$table_id)
         {
-            $sql="Select rowid from ".MAIN_DB_PREFIX."commande where fk_soc= $table_id and fk_user_valid is not null order by date_creation DESC;";
+            $sql="Select rowid from ".MAIN_DB_PREFIX."commande where fk_soc= $table_id and fk_user_valid is null order by date_creation DESC;";
             $stmt=$this->db->query($sql); 
             $Tid_order;
             foreach($stmt as $row)
@@ -74,6 +85,27 @@ class ControllerServiceRestaurant
                 $Tid_order[]=$row['rowid'];
             }
             return $Tid_order;
+        }
+        
+        /**
+	 *	Function getAllCommandesInvalidBySociete
+         * @param       $db             Database
+         *              
+	 * 
+	 * @return	array() with all rowid of products categorie 
+	 */
+        function getAllProductsCategories()
+        {
+            $res;
+            $categorie=new Categorie($this->db);
+            $categorie->fetch(5);
+            $Tcateg=$categorie->get_filles();
+            foreach($Tcateg as $categ)
+            {
+                $res[]=$categ->id;
+            }
+            asort($res);
+            return ($res);
         }
         
         function init_test_game()
@@ -151,6 +183,15 @@ class ControllerServiceRestaurant
             $entrepot->country_id=1;
             $id_entrepot=$entrepot->create($admin);
             
+            $mainCategorie=new Categorie($db);
+            $mainCategorie->entity=1;
+            $mainCategorie->fk_parent=0;
+            $mainCategorie->label="Restaurant";
+            $mainCategorie->type=0;
+            $mainCategorie->description="Les produits du restaurant";
+            $mainCategorie->visible=0;
+            $id_mainCategorie=$mainCategorie->create($admin);
+            
             $categProduct=array(
                 array("Entrees", "Les entrees du restaurant", "E", "Entree"),
                 array("Plats", "Les plats du restaurant", "P" ,"Plat"),
@@ -160,7 +201,7 @@ class ControllerServiceRestaurant
             {
                 $categorie=new Categorie($db);
                 $categorie->entity=1;
-                $categorie->fk_parent=0;
+                $categorie->fk_parent=$id_mainCategorie;
                 $categorie->label=$categName[0];
                 $categorie->type=0;
                 $categorie->description=$categName[1];
