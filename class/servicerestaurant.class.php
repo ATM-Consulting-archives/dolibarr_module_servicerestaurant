@@ -68,6 +68,17 @@ class ControllerServiceRestaurant
 	}
         
         /**
+	 *	Function update_order
+	 * @param	$table_id	Societe		Dolibarr Societe Object
+	 * 
+	 * @return	int		(0 = error, 1 = OK)
+	 */
+	function update_order($table_id) 
+        {
+            return 0;
+        }
+        
+        /**
 	 *	Function getAllCommandesInvalidBySociete
          * @param       $db             Database
 	 * @param   	$table_id	Societe		Dolibarr Societe Object
@@ -88,9 +99,7 @@ class ControllerServiceRestaurant
         }
         
         /**
-	 *	Function getAllCommandesInvalidBySociete
-         * @param       $db             Database
-         *              
+	 *	Function getAllProductsCategories
 	 * 
 	 * @return	array() with all rowid of products categorie 
 	 */
@@ -106,6 +115,18 @@ class ControllerServiceRestaurant
             }
             asort($res);
             return ($res);
+        }
+        
+        /**
+	 *	Function getAllProductsCategories
+         * @param       $id_categorie             Categorie		Dolibarr Categorie Object
+         *              
+	 * 
+	 * @return	array() with all rowid of products of the categorie set 
+	 */
+        function getAllProductByCategorie($id_categorie)
+        {
+            
         }
         
         function init_test_game()
