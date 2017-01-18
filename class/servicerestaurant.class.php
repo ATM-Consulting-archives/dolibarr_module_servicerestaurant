@@ -107,14 +107,18 @@ class ControllerServiceRestaurant
         {
             $res;
             $categorie=new Categorie($this->db);
-            $categorie->fetch(5);
-            $Tcateg=$categorie->get_filles();
-            foreach($Tcateg as $categ)
+            $cat_error=$categorie->fetch('',"Restaurant");
+            if($cat_error>0)
             {
-                $res[]=$categ->id;
+                $Tcateg=$categorie->get_filles();
+                foreach($Tcateg as $categ)
+                {
+                    $res[]=$categ->id;
+                }
+                asort($res);
+                return ($res);
             }
-            asort($res);
-            return ($res);
+            return "Creer une Catégorie \"Restaurant\"";
         }
         
         /**
