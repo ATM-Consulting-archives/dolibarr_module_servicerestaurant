@@ -279,4 +279,58 @@ class ControllerServiceRestaurant
         {
             return "<a href='".DOL_URL_ROOT."'>Retour vers Dolibarr</a>";
         }
+        
+        function showTables(){
+        	$tables=getAllTables();
+        	foreach ($tables as $tab){
+        		echo"<input type='button' name='".$tab->name."' value='".$tab->name."' onclick='".Order()."' >";
+        	}
+        
+        }
+        /**
+         * @return all the tables in an array
+         */
+        
+        function getsAllTables(){
+        	$tables=getList();
+        
+        	return $tables;
+        
+        }
+        /**
+         *
+         * @param $idcommande id of order
+         * @param $idproduct  id of the product we add to the order
+         */
+        function addProduct($idord, $idproduct){
+        	if(!getLines($idord)){
+        		post($idord);
+        	}
+        	if(!getLine($idord,$idproduct)){
+        		postLine($idord, $idproduct);}
+        		else{
+        			$prod=get($idord,$idproduct);
+        			$prod->qty=$prod->qty+1;
+        			putLine($idord,$idproduct,$prod);
+        		}
+        }
+        
+        /**
+         *
+         * @param $idcommande id of order
+         * @param $idproduct  id of the product we remove from the order
+         */
+        function removeProduct($idord,$idprod){
+        	if(getLine($idord,$idprod)){
+        		$product=getLine($idord,$idprod);
+        		if($product->qty>1){
+        			$product->qty=$product->qty-1;
+        			putLine($idord,$idproduct,$product);
+        			return $product->qty;
+        		}
+        		else{delLine($idord,$idprod);
+        		}
+        	}
+        	return 0;
+        }
 }

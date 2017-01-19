@@ -83,7 +83,9 @@ function validateOrder($id){
 
 }
 /**
- * @param $idcommande idof order
+ * 
+ * @param $idcommande id of order
+ * @param $idproduct  id of the product we add to the order
  */
 function addProduct($idord, $idproduct){
 	if(!getLines($idord)){
@@ -98,6 +100,11 @@ function addProduct($idord, $idproduct){
 	}
 }
 
+/**
+ *
+ * @param $idcommande id of order
+ * @param $idproduct  id of the product we remove from the order
+ */
 function removeProduct($idord,$idprod){
 	if(getLine($idord,$idprod)){
 		$product=getLine($idord,$idprod);
