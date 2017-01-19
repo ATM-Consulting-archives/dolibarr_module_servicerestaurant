@@ -99,13 +99,29 @@ class ControllerServiceRestaurant
         }
 
         /**
+	 *	Function getRestaurant
+	 *
+	 * @return	the id of the Restaurant
+	 */
+        function getRestaurant()
+        {
+            $restaurant=new Categorie($this->db);
+            $cat_error=$restaurant->fetch('', "Restaurant");
+            if($cat_error>0)
+            {
+                return $restaurant;
+            }
+            else return -1;
+        }
+
+        /**
 	 *	Function getAllProductsCategories
 	 *
 	 * @return	array() with all rowid of products categorie
 	 */
         function getAllProductsCategories()
         {
-            $res;
+            $res=array();
             $categorie=new Categorie($this->db);
             $cat_error=$categorie->fetch('',"Restaurant");
             if($cat_error>0)

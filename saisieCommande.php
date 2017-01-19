@@ -15,6 +15,7 @@ global $db,$conf;
 
 $servicerestaurant= new ControllerServiceRestaurant($db,$confs,$user);
 $categ=$servicerestaurant->getAllProductsCategories();
+echo "<br>".$servicerestaurant->getRestaurant()->description."<br>";
 var_dump($categ);
 foreach($categ as $cat)
 {
