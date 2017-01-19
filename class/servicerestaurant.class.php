@@ -258,4 +258,9 @@ class ControllerServiceRestaurant
                 }
             }
         }
+        
+        function buttonLeaveModule()
+        {
+            return "<a href='".DOL_URL_ROOT."'>Retour vers Dolibarr</a>";
+        }
 }

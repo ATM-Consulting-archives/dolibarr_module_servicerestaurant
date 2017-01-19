@@ -15,18 +15,21 @@ global $db,$conf;
 
 $servicerestaurant= new ControllerServiceRestaurant($db,$confs,$user); 
 $categ=$servicerestaurant->getAllProductsCategories();
-print_r($categ);
 foreach($categ as $cat)
 {
     $categorie=new Categorie($db);
     $categorie->fetch($cat);
-    echo "<br>".$categorie->label.":<br>";
+    echo "<br>$categorie->label:<br>";
     $subCat=$servicerestaurant->getAllProductByCategorie($cat);
     foreach($subCat as $subC)
     {
         $product=new Product($db);
         $product->fetch($subC);
-        echo "-$product->label <br>";
+        echo "<div style='text-indent: 15px;'>$product->label :</div> "
+                . "<div style='text-indent: 30px;'> -desc : $product->description</div>"
+                . "<div style='text-indent: 30px;'> -prix :$product->price</div>"
+                . "<div style='text-indent: 30px;'> -stock :$product->stock</div>";
         
     }
 }
+echo $servicerestaurant->buttonLeaveModule();
