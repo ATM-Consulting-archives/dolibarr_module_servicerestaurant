@@ -39,7 +39,7 @@
               {
                   $categorie=new Categorie($db);
                   $categorie->fetch($cat);
-                  echo "<a href=\"#\"><li>$categorie->label</li></a>";
+                  echo "<a class=\"chercher\" href=\"#\" name=\"$categorie->label\"><li>$categorie->label</li></a>";
               }
               ?>
             </ul>
@@ -58,95 +58,46 @@
                   <i class="fa fa-angle-down fa-stack-2x faa-float animated blue"></i>
               </span>
             </h2>
+            <div id="allProducts" >
 
-            <!-- Produits -->
-            <section class="col-lg-12 col-sm-12 produits" style="height: auto; margin-bottom: 50px; background-color: #d1d5d8; padding-top: 20px; padding-left: 10px; padding-right: 10px; padding-bottom: 20px;">
-              <div class="col-lg-4 col-sm-12">
-                <h3 style="margin: 0px;">Salade chèvre chaud</h3>
-                <p>Salade, sauce, chèvre, tartines.</p>
-                <p><br><b>Stock disponible : <input type="text" name=""stock value="10" style="background-color: rgba(255,255,255,0); border: none;"></b></p>
-              </div>
-              <div class="col-lg-4 col-sm-12" style="height: 120px;">
-                <textarea style="margin: 0px; height: 120px; width: 100%; border: none; padding: 15px;" class="col-lg-12 infos-sup" name="name" rows="8" cols="80" placeholder="Ajouter des informations complémentaires"></textarea>
-              </div>
-              <div class="col-lg-4 col-sm-12">
-                <div class="col-lg-4 col-sm-4 moins" style="cursor: pointer; background-color: #3c8eb9; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
-                  -
-                </div>
-                <div class="col-lg-4 col-sm-4 count" style="background-color: white; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
-                  0
-                </div>
-                <div class="col-lg-4 col-sm-4 plus" style="cursor: pointer; background-color: #3c8eb9; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
-                  +
-                </div>
-              </div>
-            </section>
-
-            <section class="col-lg-12 col-sm-12 produits" style="height: auto; margin-bottom: 50px; background-color: #d1d5d8; padding-top: 20px; padding-left: 10px; padding-right: 10px; padding-bottom: 20px;">
-              <div class="col-lg-4 col-sm-12">
-                <h3 style="margin: 0px;">Salade chèvre pas chaud</h3>
-                <p>Salade, sauce, chèvre pas chaud, tartines.</p>
-                <p><br><b>Stock disponible : <input type="text" name="stock" value="2" style="background-color: rgba(255,255,255,0); border: none;"></b></p>
-              </div>
-              <div class="col-lg-4 col-sm-12" style="height: 120px;">
-                <textarea style="margin: 0px; height: 120px; width: 100%; border: none; padding: 15px;" class="col-lg-12 infos-sup" name="name" rows="8" cols="80" placeholder="Ajouter des informations complémentaires"></textarea>
-              </div>
-              <div class="col-lg-4 col-sm-12">
-                <div class="col-lg-4 col-sm-4 moins" style="cursor: pointer; background-color: #3c8eb9; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
-                  -
-                </div>
-                <div class="col-lg-4 col-sm-4 count" style="background-color: white; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
-                  0
-                </div>
-                <div class="col-lg-4 col-sm-4 plus" style="cursor: pointer; background-color: #3c8eb9; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
-                  +
-                </div>
-              </div>
-            </section>
-
-            <section class="col-lg-12 col-sm-12 produits" style="height: auto; margin-bottom: 50px; background-color: #d1d5d8; padding-top: 20px; padding-left: 10px; padding-right: 10px; padding-bottom: 20px;">
-              <div class="col-lg-4 col-sm-12">
-                <h3 style="margin: 0px;">Test stock insuffisant</h3>
-                <p>Salade, sauce, chèvre pas chaud, tartines.</p>
-                <p><br><b>Stock disponible : <input type="text" name="stock" value="4" style="background-color: rgba(255,255,255,0); border: none;"></b></p>
-              </div>
-              <div class="col-lg-4 col-sm-12" style="height: 120px;">
-                <textarea style="margin: 0px; height: 120px; width: 100%; border: none; padding: 15px;" class="col-lg-12 infos-sup" name="name" rows="8" cols="80" placeholder="Ajouter des informations complémentaires"></textarea>
-              </div>
-              <div class="col-lg-4 col-sm-12">
-                <div class="col-lg-4 col-sm-4 moins" style="cursor: pointer; background-color: #3c8eb9; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
-                  -
-                </div>
-                <div class="col-lg-4 col-sm-4 count" style="background-color: white; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
-                  0
-                </div>
-                <div class="col-lg-4 col-sm-4 plus" style="cursor: pointer; background-color: #3c8eb9; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
-                  +
-                </div>
-              </div>
-            </section>
-
-            <section class="col-lg-12 col-sm-12 produits" style="height: auto; margin-bottom: 50px; background-color: #d1d5d8; padding-top: 20px; padding-left: 10px; padding-right: 10px; padding-bottom: 20px;">
-              <div class="col-lg-4 col-sm-12">
-                <h3 style="margin: 0px;">Encore une entrée</h3>
-                <p>Salade, sauce, chèvre pas chaud, tartines.</p>
-                <p><br><b>Stock disponible : <input type="text" name="stock" value="11" style="background-color: rgba(255,255,255,0); border: none;"></b></p>
-              </div>
-              <div class="col-lg-4 col-sm-12" style="height: 120px;">
-                <textarea style="margin: 0px; height: 120px; width: 100%; border: none; padding: 15px;" class="col-lg-12 infos-sup" name="name" rows="8" cols="80" placeholder="Ajouter des informations complémentaires"></textarea>
-              </div>
-              <div class="col-lg-4 col-sm-12">
-                <div class="col-lg-4 col-sm-4 moins" style="cursor: pointer; background-color: #3c8eb9; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
-                  -
-                </div>
-                <div class="col-lg-4 col-sm-4 count" style="background-color: white; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
-                  0
-                </div>
-                <div class="col-lg-4 col-sm-4 plus" style="cursor: pointer; background-color: #3c8eb9; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
-                  +
-                </div>
-              </div>
-            </section>
+            </div> <!-- All Products -->
+            <?php
+            foreach($categ as $cat)
+            {
+                $categorie->fetch($cat);
+                if($_GET['cat'] == "$categorie->label") {
+                  $subCat=$servicerestaurant->getAllProductByCategorie($cat);
+                  foreach($subCat as $subC)
+                  {
+                      $product=new Product($db);
+                      $product->fetch($subC);
+                      ?>
+                      <section id="section"class="col-lg-12 col-sm-12 produits" style="height: auto; margin-bottom: 50px; background-color: #d1d5d8; padding-top: 20px; padding-left: 10px; padding-right: 10px; padding-bottom: 20px;">
+                        <div class="col-lg-4 col-sm-12">
+                          <h3 style="margin: 0px;"><?php echo $product->label; ?></h3>
+                          <p><?php echo $product->description; ?></p>
+                          <p><br><b>Stock disponible : <input type="text" name="stock" value="<?php echo substr($product->price,0,5); ?>" style="background-color: rgba(255,255,255,0); border: none;"></b></p>
+                        </div>
+                        <div class="col-lg-4 col-sm-12" style="height: 120px;">
+                          <textarea style="margin: 0px; height: 120px; width: 100%; border: none; padding: 15px;" class="col-lg-12 infos-sup" name="name" rows="8" cols="80" placeholder="Ajouter des informations complémentaires"></textarea>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                          <div class="col-lg-4 col-sm-4 moins" style="cursor: pointer; background-color: #3c8eb9; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
+                            -
+                          </div>
+                          <div class="col-lg-4 col-sm-4 count" style="background-color: white; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
+                            0
+                          </div>
+                          <div class="col-lg-4 col-sm-4 plus" style="cursor: pointer; background-color: #3c8eb9; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
+                            +
+                          </div>
+                        </div>
+                      </section>
+                      <?php
+                  }
+                }
+            }
+            ?>
 
 
           </div>
@@ -154,7 +105,10 @@
 
       <script src="less/dist/less.js" type="text/javascript"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript"></script>
       <script src="js/color.js"></script>
+      <script src="js/cat.js"></script>
+
 
   </body>
 </html>
