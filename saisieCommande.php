@@ -25,10 +25,10 @@ foreach($categ as $cat)
     {
         $product=new Product($db);
         $product->fetch($subC);
-        echo "<div style='text-indent: 15px;'>$product->label :</div> "
+        echo ("<div style='text-indent: 15px;'>$product->label :</div> "
                 . "<div style='text-indent: 30px;'> -desc : $product->description</div>"
-                . "<div style='text-indent: 30px;'> -prix :$product->price</div>"
-                . "<div style='text-indent: 30px;'> -stock :$product->stock</div>";
+                . "<div style='text-indent: 30px;'> -prix :".substr($product->price,0,5)."&euro;</div>"
+                . "<div style='text-indent: 30px;'> -stock :$product->stock_reel</div>");
         
     }
 }
