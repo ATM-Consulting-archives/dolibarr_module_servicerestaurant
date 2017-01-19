@@ -20,5 +20,13 @@ foreach($categ as $cat)
 {
     $categorie=new Categorie($db);
     $categorie->fetch($cat);
-    echo $categorie->label;
+    echo "<br>".$categorie->label.":<br>";
+    $subCat=$servicerestaurant->getAllProductByCategorie($cat);
+    foreach($subCat as $subC)
+    {
+        $product=new Product($db);
+        $product->fetch($subC);
+        echo "-$product->label <br>";
+        
+    }
 }
