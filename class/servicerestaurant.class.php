@@ -146,7 +146,7 @@ class ControllerServiceRestaurant
 	 */
         function getAllProductByCategorie($id_categorie)
         {
-            $res;
+            $res=array();
             $categorie=new Categorie($this->db);
             $cat_error=$categorie->fetch($id_categorie);
             if($cat_error>0)
@@ -159,7 +159,26 @@ class ControllerServiceRestaurant
                 asort($res);
                 return ($res);
             }
-            return "Catégorie inexistante";
+            return $res;
+        }/**
+	 *	Function getAllProductOrderByCategorie
+         *
+	 *
+	 * @return	array() with all rowid of products of the restaurant
+	 */
+        function getAllProductOrderByCategorie()
+        {
+            $res=array();
+            $Tcategorie_restaurant=$this->getAllProductsCategories();
+            foreach($Tcategorie_restaurant as $id_categorie)
+            {
+                $Tid_categorie=$this->getAllProductByCategorie($id_categorie);
+                foreach($Tid_categorie as $id_product_by_categorie)
+                {
+                    $res[]=$id_product_by_categorie;
+                }
+            }
+            return $res;
         }
 
         function init_test_game()

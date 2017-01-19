@@ -34,4 +34,22 @@ foreach($categ as $cat)
 
     }
 }
-echo $servicerestaurant->buttonLeaveModule();
+echo $servicerestaurant->buttonLeaveModule()."<br>";
+$all_cat=$servicerestaurant->getAllProductOrderByCategorie();
+foreach($all_cat as $cat)
+{
+    $categorie=new Categorie($db);
+    $categorie->fetch($cat);
+    echo "<br>$categorie->label:<br>";
+    $subCat=$servicerestaurant->getAllProductByCategorie($cat);
+    foreach($subCat as $subC)
+    {
+        $product=new Product($db);
+        $product->fetch($subC);
+        echo ("<div style='text-indent: 15px;'>$product->label :</div> "
+                . "<div style='text-indent: 30px;'> -desc : $product->description</div>"
+                . "<div style='text-indent: 30px;'> -prix :".substr($product->price,0,5)."&euro;</div>"
+                . "<div style='text-indent: 30px;'> -stock :$product->stock_reel</div>");
+
+    }
+}
