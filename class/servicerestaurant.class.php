@@ -130,7 +130,20 @@ class ControllerServiceRestaurant
 	 */
         function getAllProductByCategorie($id_categorie)
         {
-            
+            $res;
+            $categorie=new Categorie($this->db);
+            $cat_error=$categorie->fetch($id_categorie);
+            if($cat_error>0)
+            {
+                $Tcateg=$categorie->getObjectsInCateg("product");
+                foreach($Tcateg as $categ)
+                {
+                    $res[]=$categ->id;
+                }
+                asort($res);
+                return ($res);
+            }
+            return "Catégorie inexistante";
         }
         
         function init_test_game()
