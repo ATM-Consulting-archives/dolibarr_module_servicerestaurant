@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -13,8 +13,9 @@ dol_include_once("/dolibarr_module_servicerestaurant/class/servicerestaurant.cla
 echo "Bienvenu sur la saisie de commande";
 global $db,$conf;
 
-$servicerestaurant= new ControllerServiceRestaurant($db,$confs,$user); 
+$servicerestaurant= new ControllerServiceRestaurant($db,$confs,$user);
 $categ=$servicerestaurant->getAllProductsCategories();
+var_dump($categ);
 foreach($categ as $cat)
 {
     $categorie=new Categorie($db);
@@ -29,7 +30,7 @@ foreach($categ as $cat)
                 . "<div style='text-indent: 30px;'> -desc : $product->description</div>"
                 . "<div style='text-indent: 30px;'> -prix :".substr($product->price,0,5)."&euro;</div>"
                 . "<div style='text-indent: 30px;'> -stock :$product->stock_reel</div>");
-        
+
     }
 }
 echo $servicerestaurant->buttonLeaveModule();

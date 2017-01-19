@@ -1,5 +1,5 @@
 
-      <?php include_once('include/menu.html'); ?>
+      <?php include_once('include/menu.php'); ?>
       <style media="screen">
       .confirm {
         width: 125px;
@@ -13,7 +13,7 @@
         z-index: 5000;
         background-image: url('img/valid.png');
         background-position: center;
-        background-size: 50%; 
+        background-size: 50%;
         background-repeat: no-repeat;
         cursor: pointer;
         -moz-box-shadow: 1px 1px 5px 2px #cfcfcf;
@@ -31,13 +31,17 @@
 
           <!-- Menu sidebar catégories roduits -->
           <div class="sidebar">
+
             <ul>
-              <a href="#"><li class="active">Entrées</li></a>
-              <a href="#"><li>Plats</li></a>
-              <a href="#"><li>Desserts</li></a>
-              <a href="#"><li>Vins</li></a>
-              <a href="#"><li>Boissons</li></a>
-              <a href="#"><li>Apéritif</li></a>
+              <?php
+              $categ=$servicerestaurant->getAllProductsCategories();
+              foreach($categ as $cat)
+              {
+                  $categorie=new Categorie($db);
+                  $categorie->fetch($cat);
+                  echo "<a href=\"#\"><li>$categorie->label</li></a>";
+              }
+              ?>
             </ul>
           </div>
 

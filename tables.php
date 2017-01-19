@@ -1,4 +1,4 @@
-<?php include_once('include/menu.html'); ?>
+<?php include_once('include/menu.php'); ?>
 
       <!-- MODAL A : Prendre une nouvelle commande -->
       <div class="modal fade position-modal" id="myModalNew" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">

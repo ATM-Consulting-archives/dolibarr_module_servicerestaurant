@@ -12,15 +12,15 @@ class ControllerServiceRestaurant
 {
 	// Privates var
 	private $db;
-	
+
 	// Publics var
 	public $conf;
 	public $user;
-	
-	
+
+
 	/**
 	 *	Constructor
-	 * 
+	 *
 	 * @param	$db		DataBase	Dolibarr Database Object
 	 * @param	$conf	array()		Array with all Dolibarr configs
 	 * @param	$user	User		Dolibarr User Object
@@ -30,27 +30,27 @@ class ControllerServiceRestaurant
 		$this->conf = $conf;
 		$this->user = $user;
 	}
-	
+
 	/**
 	 *	Function generate_first_usecase
-	 * 
+	 *
 	 * Generate defaults products ... to test this module.
-	 * 
+	 *
 	 * @return	int		(0 = error, 1 = OK)
 	 */
 	function generate_first_usecase() {
 		$product = new Product($this->db);
 		// TODO generate products
-		
+
 	}
-	
+
 	/**
 	 *	Function generate_order
 	 * @param	$table_id	Societe		Dolibarr Societe Object
-	 * 
+	 *
 	 * @return	int		(0 = error, 1 = OK)
 	 */
-	function generate_order($table_id) 
+	function generate_order($table_id)
         {
             $commande = new Commande($this->db);
             $Tid_OrderBySociete=$this->getAllCommandesInvalidBySociete($this->db,$table_id);
@@ -66,30 +66,30 @@ class ControllerServiceRestaurant
                 return 0;
             }
 	}
-        
+
         /**
 	 *	Function update_order
 	 * @param	$table_id	Societe		Dolibarr Societe Object
-	 * 
+	 *
 	 * @return	int		(0 = error, 1 = OK)
 	 */
-	function update_order($table_id) 
+	function update_order($table_id)
         {
             return 0;
         }
-        
+
         /**
 	 *	Function getAllCommandesInvalidBySociete
          * @param       $db             Database
 	 * @param   	$table_id	Societe		Dolibarr Societe Object
-         *              
-	 * 
-	 * @return	array() with all rowid of invalid order 
+         *
+	 *
+	 * @return	array() with all rowid of invalid order
 	 */
         function getAllCommandesInvalidBySociete($db,$table_id)
         {
             $sql="Select rowid from ".MAIN_DB_PREFIX."commande where fk_soc= $table_id and fk_user_valid is null order by date_creation DESC;";
-            $stmt=$this->db->query($sql); 
+            $stmt=$this->db->query($sql);
             $Tid_order;
             foreach($stmt as $row)
             {
@@ -97,11 +97,11 @@ class ControllerServiceRestaurant
             }
             return $Tid_order;
         }
-        
+
         /**
 	 *	Function getAllProductsCategories
-	 * 
-	 * @return	array() with all rowid of products categorie 
+	 *
+	 * @return	array() with all rowid of products categorie
 	 */
         function getAllProductsCategories()
         {
@@ -120,13 +120,13 @@ class ControllerServiceRestaurant
             }
             return "Creer une Catégorie \"Restaurant\"";
         }
-        
+
         /**
 	 *	Function getAllProductsCategories
          * @param       $id_categorie             Categorie		Dolibarr Categorie Object
-         *              
-	 * 
-	 * @return	array() with all rowid of products of the categorie set 
+         *
+	 *
+	 * @return	array() with all rowid of products of the categorie set
 	 */
         function getAllProductByCategorie($id_categorie)
         {
@@ -145,7 +145,7 @@ class ControllerServiceRestaurant
             }
             return "Catégorie inexistante";
         }
-        
+
         function init_test_game()
         {
             $usergroup= new UserGroup($this->db);
@@ -155,7 +155,7 @@ class ControllerServiceRestaurant
                 $this->test_game();
             }
         }
-    
+
         function test_game()
         {
             $admin=new User($this->db);
@@ -172,13 +172,13 @@ class ControllerServiceRestaurant
             $usergroup->entity=1;
             $usergroup->note="Les serveurs du restaurant";
             $id_group=$usergroup->create();
-            
+
             $Ids_right=array(11,12,31,81,82,87,121,122,21,342,343,1001);
             foreach ($Ids_right as $id_right)
             {
                 $usergroup->addrights($id_right);
             }
-            
+
             $user=new User($db);
             $user->login="Serveur1";
             $user->lastname="serveur";
@@ -188,7 +188,7 @@ class ControllerServiceRestaurant
             $user->create($admin);
             $user->SetInGroup($id_group,1);
         }
-        
+
         function TestGameSocieteAndCategories($db,$admin)
         {
             $categorie=new Categorie($db);
@@ -199,7 +199,7 @@ class ControllerServiceRestaurant
             $categorie->description="Liste des tables du restaurant";
             $categorie->visible=0;
             $id_categorie=$categorie->create($admin);
-            
+
             for ($i=1;$i<11;$i++)
             {
                 $societe=new Societe($db);
@@ -209,7 +209,7 @@ class ControllerServiceRestaurant
                 $societe->setCategories($id_categorie, 'customer');
             }
         }
-        
+
         function TestGameProductAndCategories($db,$admin)
         {
             $entrepot=new Entrepot($db);
@@ -220,7 +220,7 @@ class ControllerServiceRestaurant
             $entrepot->tobuy=1;
             $entrepot->country_id=1;
             $id_entrepot=$entrepot->create($admin);
-            
+
             $mainCategorie=new Categorie($db);
             $mainCategorie->entity=1;
             $mainCategorie->fk_parent=0;
@@ -229,7 +229,7 @@ class ControllerServiceRestaurant
             $mainCategorie->description="Les produits du restaurant";
             $mainCategorie->visible=0;
             $id_mainCategorie=$mainCategorie->create($admin);
-            
+
             $categProduct=array(
                 array("Entrees", "Les entrees du restaurant", "E", "Entree"),
                 array("Plats", "Les plats du restaurant", "P" ,"Plat"),
@@ -245,7 +245,7 @@ class ControllerServiceRestaurant
                 $categorie->description=$categName[1];
                 $categorie->visible=0;
                 $id_categorie=$categorie->create($admin);
-                
+
                 for ($i=1;$i<4;$i++)
                 {
                     $product=new Product($db);
@@ -258,7 +258,7 @@ class ControllerServiceRestaurant
                 }
             }
         }
-        
+
         function buttonLeaveModule()
         {
             return "<a href='".DOL_URL_ROOT."'>Retour vers Dolibarr</a>";

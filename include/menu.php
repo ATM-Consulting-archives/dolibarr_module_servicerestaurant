@@ -16,6 +16,18 @@
 
 </head>
 <body>
+  <?php
+    require '../main.inc.php';
+    require_once DOL_DOCUMENT_ROOT . '/core/lib/functions.lib.php';
+    require_once DOL_DOCUMENT_ROOT . '/core/lib/functions2.lib.php';
+
+    dol_include_once("/dolibarr_module_servicerestaurant/class/servicerestaurant.class.php");
+
+    global $db,$conf;
+
+    $servicerestaurant= new ControllerServiceRestaurant($db,$confs,$user);
+
+    ?>
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -36,7 +48,7 @@
 
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Retourner sur Dolibarr<br></a></li>
+        <li><?php echo $servicerestaurant->buttonLeaveModule(); ?></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
