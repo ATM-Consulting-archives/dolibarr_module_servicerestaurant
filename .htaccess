@@ -1,0 +1,7 @@
+# Activation de mod_rewrite
+# RewriteEngine on
+# RewriteRule ^pic([0-9]*)$ /picture.php?pic=$1 [L]
+
+# Empecher l'affichage des fichiers d'un dossier sans index
+ErrorDocument 403 http:/studraw.com/403.php 
+options -indexes

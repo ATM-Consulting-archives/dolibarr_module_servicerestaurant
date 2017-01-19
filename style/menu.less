@@ -1,0 +1,134 @@
+// ----------------- IMPORT -------------------- //
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+// ----------------- CONSTANTES -------------------- //
+@timeTransition: 0.3s;
+
+@main-color: #3c8eb9;
+
+@iron: #d1d5d8;
+@ironGrey: #75706b;
+@whale: #28324e;
+@white: #efefef;
+@black: #000000;
+
+
+@facebook: #385c8e;
+@twitter: #00aced;
+@google: #dd4b39;
+@pinterest: #cb2027;
+@tumblr: #32506d;
+// ----------------- FUNCTIONS -------------------- //
+.transition {
+  -webkit-transition: all @timeTransition ease;
+  -moz-transition: all @timeTransition ease;
+  -o-transition: all @timeTransition ease;
+  transition: all @timeTransition ease;
+}
+.transition(@param) {
+  -webkit-transition: all @param ease;
+  -moz-transition: all @param ease;
+  -o-transition: all @param ease;
+  transition: all @param ease;
+}
+.rotate {
+  -moz-transform: rotate(-1deg);
+-webkit-transform: rotate(-1deg);
+-o-transform: rotate(-1deg);
+-ms-transform: rotate(-1deg);
+transform: rotate(-1deg);
+}
+.zoom(@scale) {
+  -moz-transform: scale(@scale);
+-webkit-transform: scale(@scale);
+-o-transform: scale(@scale);
+-ms-transform: scale(@scale);
+transform: scale(@scale);
+}
+.inside-border {
+  -moz-box-shadow: inset 0px 0px 0px 2px #656565;
+-webkit-box-shadow: inset 0px 0px 0px 2px #656565;
+-o-box-shadow: inset 0px 0px 0px 2px #656565;
+box-shadow: inset 0px 0px 0px 2px #656565;
+filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=NaN, Strength=0);
+}
+.blue {
+  color: @whale !important;
+}
+// ----------------- STYLE -------------------- //
+.legend {
+  margin-bottom: 50px; text-transform: uppercase; vertical-align: middle; line-height: 50px; color: #efefef;
+  .occupe {
+    height: 50px; background-color: #00a885;
+  }
+  .libre {
+    height: 50px; background-color: #d1d5d8;
+  }
+
+}
+
+@media (max-width: 1200px) {
+
+}
+@media (max-width: 768px) {
+  input[type=checkbox] {
+   display: none;
+  }
+  input:checked ~ .main-container {
+    display: none;
+  }
+  input:checked ~ label {
+    display: none;
+  }
+  label {
+    display: none;
+  }
+  .sidebar {
+    background-color: #3c8eb9;
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    bottom: 0;
+    ul {
+      width: 100%;
+      height: 50px;
+      padding-left: 0px;
+      list-style: none;
+      .active {
+        background-color: #4697c3;
+      }
+      li {
+        width: 15%;
+        height: 50px;
+        line-height: 50px;
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+        text-transform: uppercase;
+        &:hover {
+          background-color: #4697c3;
+        }
+      }
+    }
+    a {
+      text-decoration: none;
+      color: white;
+    }
+  }
+  .main-container {
+    background-color: #efefef;
+    height: auto;
+    padding: 50px;
+    width: 100%;
+    position: absolute;
+    top: 100px;
+    left: 0px;
+    right: 0;
+    bottom: 0;
+    .transition;
+    section {
+        background-color: #efefef;
+    }
+  }
+}
