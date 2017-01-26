@@ -32,23 +32,10 @@ class ControllerServiceRestaurant
 	}
 
 	/**
-	 *	Function generate_first_usecase
-	 *
-	 * Generate defaults products ... to test this module.
-	 *
-	 * @return	int		(0 = error, 1 = OK)
-	 */
-	function generate_first_usecase() {
-		$product = new Product($this->db);
-		// TODO generate products
-
-	}
-
-	/**
 	 *	Function generate_order
 	 * @param	$table_id	Societe		Dolibarr Societe Object
 	 *
-	 * @return	int		(0 = error, 1 = OK)
+	 * @return	int		(0 = error, 0 < OK)
 	 */
 	function generate_order($table_id)
         {
@@ -57,8 +44,9 @@ class ControllerServiceRestaurant
             if(sizeof($Tid_OrderBySociete)==0)
             {
                 $commande->socid=$table_id;
+                $commande->date=time();
                 $commande->create($this->user);
-                return 1;
+                return $commande->rowid;
             }
             else
             {
@@ -71,11 +59,38 @@ class ControllerServiceRestaurant
 	 *	Function update_order
 	 * @param	$table_id	Societe		Dolibarr Societe Object
 	 *
-	 * @return	int		(0 = error, 1 = OK)
+	 * @return	int		(0 = error, 0 < OK)
 	 */
 	function update_order($table_id)
         {
-            return 0;
+            $Tid_commande=$this->getAllCommandesInvalidBySociete($this->db,$table_id);
+            $id_commande=$Tid_commande[0];
+            $commande= new Commande($this->db);
+            $error_commande=$commande->fetch($id_commande);
+            if($error_commande<0)
+            {
+                return 0;
+            }
+            return $commande->id;
+        }
+
+        /**
+	 *	Function valiate_order
+	 * @param	$table_id	Societe		Dolibarr Societe Object
+	 *
+	 * @return	int		(0 = error, 1 = OK)
+	 */
+	function valiate_order($table_id)
+        {
+            $commande= new Commande($this->db);
+            $id_commande=$this->getAllCommandesInvalidBySociete($this->db,$table_id)[0];
+            $error_commande=$commande->fetch($id_commande);
+            if($error_commande<0)
+            {
+                return 0;
+            }
+            $commande->valid($this->user);
+            return 1;
         }
 
         /**

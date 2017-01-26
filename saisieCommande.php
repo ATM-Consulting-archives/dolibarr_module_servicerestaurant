@@ -34,8 +34,18 @@ foreach($categ as $cat)
 
     }
 }
+$servicerestaurant->generate_order(1);
+$Tcmd=$servicerestaurant->getAllCommandesInvalidBySociete($db,1);
+echo("<br>cmd :".$Tcmd[0]);
+$id_commande=$servicerestaurant->update_order(1);
+echo "<br>cmd :".$id_commande."<br>";
+
+$servicerestaurant->valiate_order(1);
+$Tcmd=$servicerestaurant->getAllCommandesInvalidBySociete($db,1);
+echo("<br>cmd :".$Tcmd[0]);
+
 echo $servicerestaurant->buttonLeaveModule()."<br>";
-$all_cat=$servicerestaurant->getAllProductOrderByCategorie();
+/*$all_cat=$servicerestaurant->getAllProductOrderByCategorie();
 foreach($all_cat as $cat)
 {
     $categorie=new Categorie($db);
@@ -52,4 +62,4 @@ foreach($all_cat as $cat)
                 . "<div style='text-indent: 30px;'> -stock :$product->stock_reel</div>");
 
     }
-}
+}*/
