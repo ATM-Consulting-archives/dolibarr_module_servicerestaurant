@@ -14,7 +14,7 @@
         <div class="modal-dialog">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <!-- Récupérer le numéro de la commande -->
-          <a href="commande.php?commande=1"><button type="button" class="btn btn-default bouton col-lg-12 col-md-12 col-sm-12 col-xs-12">Modifier</button></a>
+          <a href="commande.php?numCom=<?php echo $servicerestaurant->update_order(2);?>"><button type="button" class="btn btn-default bouton col-lg-12 col-md-12 col-sm-12 col-xs-12">Modifier</button></a>
           <a href="#" data-target="#myModalVerif" data-toggle="modal" data-dismiss="modal"><button type="button" class="btn btn-default bouton col-lg-12 col-md-12 col-sm-12 col-xs-12">Terminer</button></a>
         </div>
       </div> <!-- /. Fin Modal -->
@@ -57,6 +57,7 @@
               <div class="square" style="background-size: cover;">
                 <a href="#" data-toggle="modal" data-target="">
                 <div class="square__content">
+                  <?php echo $servicerestaurant->update_order(2);?>
                   TABLE
                 </div>
                 </a>
