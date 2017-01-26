@@ -329,9 +329,11 @@ class ControllerServiceRestaurant
          */
         
         function getsAllTables(){
-        	$tables=getList();
-        
-        	return $tables;
+            $categorie= new Categorie($this->db);
+            $error_categorie=$categorie->fetch("","Tables");
+            if($error_categorie<0) return 0;            
+            $T_Table=$categorie->getObjectsInCateg("customer");        	
+            return $T_Table;
         
         }
         /**

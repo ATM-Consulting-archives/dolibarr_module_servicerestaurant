@@ -44,6 +44,10 @@ $servicerestaurant->valiate_order(1);
 $Tcmd=$servicerestaurant->getAllCommandesInvalidBySociete($db,1);
 echo("<br>cmd :".$Tcmd[0]);
 
+$table=$servicerestaurant->getsAllTables();
+
+var_dump($table);
+
 echo $servicerestaurant->buttonLeaveModule()."<br>";
 /*$all_cat=$servicerestaurant->getAllProductOrderByCategorie();
 foreach($all_cat as $cat)
