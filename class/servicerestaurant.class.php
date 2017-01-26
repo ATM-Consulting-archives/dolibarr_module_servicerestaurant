@@ -281,9 +281,12 @@ class ControllerServiceRestaurant
             $id_mainCategorie=$mainCategorie->create($admin);
 
             $categProduct=array(
-                array("Entrees", "Les entrees du restaurant", "E", "Entree"),
+                array("Apéritifs", "Les apéritifs du restaurant", "A", "Apéritif"),
+                array("Entrées", "Les entrées du restaurant", "E", "Entrée"),
                 array("Plats", "Les plats du restaurant", "P" ,"Plat"),
-                array("Desserts", "Les desserts du restaurant", "D" ,"Dessert")
+                array("Desserts", "Les desserts du restaurant", "D" ,"Dessert"),
+                array("Vins", "Les vins du restaurant", "V" ,"Vin"),
+                array("Boissons", "Les boissons du restaurant", "B" ,"Boisson")
             );
             foreach ($categProduct as $categName)
             {
