@@ -13,8 +13,19 @@
       <div class="modal fade position-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
         <div class="modal-dialog">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <button type="button" class="btn btn-default bouton col-lg-12 col-md-12 col-sm-12 col-xs-12" data-dismiss="modal">Modifier</button>
-          <button type="button" class="btn btn-default bouton col-lg-12 col-md-12 col-sm-12 col-xs-12" data-dismiss="modal">Terminer</button>
+          <!-- Récupérer le numéro de la commande -->
+          <a href="commande.php?commande=1"><button type="button" class="btn btn-default bouton col-lg-12 col-md-12 col-sm-12 col-xs-12">Modifier</button></a>
+          <a href="#" data-target="#myModalVerif" data-toggle="modal" data-dismiss="modal"><button type="button" class="btn btn-default bouton col-lg-12 col-md-12 col-sm-12 col-xs-12">Terminer</button></a>
+        </div>
+      </div> <!-- /. Fin Modal -->
+
+      <!-- Modal de vérificatino -->
+      <div class="modal fade position-modal" id="myModalVerif" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog">
+          <h2 class="text-center" style="color: white;">Cette action va réinitialiser la table. Êtes-vous sur de vouloir continuer ?</h2>
+            <!-- onClick : vider la table -->
+          <button onclick="" type="button" class="btn btn-default bouton col-lg-12 col-md-12 col-sm-12 col-xs-12">OUI</button></a>
+          <button type="button" class="btn btn-default bouton col-lg-12 col-md-12 col-sm-12 col-xs-12" data-dismiss="modal">NON</button>
         </div>
       </div> <!-- /. Fin Modal -->
 
