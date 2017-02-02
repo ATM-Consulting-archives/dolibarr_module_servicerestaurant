@@ -55,9 +55,7 @@
           <!-- Titre -->
           <div class="main-container">
             <h2 class="text-center">
-              Comande n° <?php if ($_GET['numCom']==0) {
-                header('Location: error.php');
-              } ?><br>
+              Comande n°1<br>
               <span class="fa-stack ">
                   <i class="fa fa-angle-down fa-stack-2x faa-float animated blue"></i>
               </span>

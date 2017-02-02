@@ -15,39 +15,48 @@ global $db,$conf;
 
 $servicerestaurant= new ControllerServiceRestaurant($db,$confs,$user);
 $categ=$servicerestaurant->getAllProductsCategories();
-echo "<br>".$servicerestaurant->getRestaurant()->description."<br>";
-var_dump($categ);
+//echo "<br>".$servicerestaurant->getRestaurant()->description."<br>";
+//var_dump($categ);
 foreach($categ as $cat)
 {
     $categorie=new Categorie($db);
     $categorie->fetch($cat);
-    echo "<br>$categorie->label:<br>";
+    //echo "<br>$categorie->label:<br>";
     $subCat=$servicerestaurant->getAllProductByCategorie($cat);
     foreach($subCat as $subC)
     {
         $product=new Product($db);
         $product->fetch($subC);
-        echo ("<div style='text-indent: 15px;'>$product->label :</div> "
+        /*echo ("<div style='text-indent: 15px;'>$product->label :</div> "
                 . "<div style='text-indent: 30px;'> -desc : $product->description</div>"
                 . "<div style='text-indent: 30px;'> -prix :".substr($product->price,0,5)."&euro;</div>"
-                . "<div style='text-indent: 30px;'> -stock :$product->stock_reel</div>");
+                . "<div style='text-indent: 30px;'> -stock :$product->stock_reel</div>");*/
 
     }
 }
 $servicerestaurant->generate_order(1);
 $Tcmd=$servicerestaurant->getAllCommandesInvalidBySociete($db,1);
-echo("<br>cmd :".$Tcmd[0]);
+//echo("<br>cmd :".$Tcmd[0]);
 $id_commande=$servicerestaurant->update_order(1);
-echo "<br>cmd :".$id_commande."<br>";
+//echo "<br>cmd :".$id_commande."<br>";
 
 $servicerestaurant->valiate_order(1);
 $Tcmd=$servicerestaurant->getAllCommandesInvalidBySociete($db,1);
-echo("<br>cmd :".$Tcmd[0]);
+//echo("<br>cmd :".$Tcmd[0]);
 
 $table=$servicerestaurant->getsAllTables();
 
-var_dump($table);
+$T_table_id=array();
+foreach($table as $t)
+{
+    $T_table_id[]=$t->id;
+}
+var_dump($T_table_id);
 
+$servicerestaurant->showTables();
+$commande=new Commande($db);
+$commande->fetch(29);
+$T_line=$commande->getLinesArray();
 echo $servicerestaurant->buttonLeaveModule()."<br>";
 /*$all_cat=$servicerestaurant->getAllProductOrderByCategorie();
 foreach($all_cat as $cat)

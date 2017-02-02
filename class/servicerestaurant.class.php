@@ -318,9 +318,9 @@ class ControllerServiceRestaurant
         }
         
         function showTables(){
-        	$tables=getAllTables();
+        	$tables=$this->getsAllTables();
         	foreach ($tables as $tab){
-        		echo"<input type='button' name='".$tab->name."' value='".$tab->name."' onclick='".Order()."' >";
+        		echo "<input type='button' id='$tab->id ' name='".$tab->name."' value='".$tab->name."' />";
         	}
         
         }
@@ -356,20 +356,29 @@ class ControllerServiceRestaurant
         
         /**
          *
-         * @param $idcommande id of order
-         * @param $idproduct  id of the product we remove from the order
+         * @param $id_ord id of order
+         * @param $id_prod  id of the product we remove from the order
          */
-        function removeProduct($idord,$idprod){
-        	if(getLine($idord,$idprod)){
-        		$product=getLine($idord,$idprod);
-        		if($product->qty>1){
-        			$product->qty=$product->qty-1;
-        			putLine($idord,$idproduct,$product);
-        			return $product->qty;
-        		}
-        		else{delLine($idord,$idprod);
-        		}
-        	}
-        	return 0;
+        function removeProduct($id_ord,$id_prod){
+            $commande = new Commande($this->db);
+            $error_commande=$commande->fetch($id_ord);
+            if($error_commande<0)
+            {
+                return -1;
+            }
+            if(getLine($id_ord,$id_prod)){
+                    $product=getLine($id_ord,$id_prod);
+                    if($product->qty>1)
+                    {
+                        $product->qty=$product->qty-1;
+                        putLine($id_ord,$id_prod,$product);
+                        return $product->qty;
+                    }
+                    else
+                    {
+                        delLine($id_ord,$id_prod);
+                    }
+            }
+            return 0;
         }
 }
