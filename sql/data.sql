@@ -8,7 +8,7 @@
  * Created: 9 janv. 2017
  */
 -- Création Utilisateurs*
-
+/*
 Insert into llx_usergroup(nom,entity,datec,tms,note)
 values("Serveurs",1,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,"Les serveurs du restaurant");
 
@@ -197,7 +197,7 @@ values
 insert into llx_entrepot(datec,tms,label,entity,description)
 select current_timestamp,current_timestamp,"E1",1,"Entrepot1"
 /*from DUAL
-where (select count(rowid) from llx_entrepot) =0*/;
+where (select count(rowid) from llx_entrepot) =0;
 
 -- Fin création d'entepot
 
@@ -274,3 +274,5 @@ insert into llx_categorie_product(fk_categorie,fk_product)
 values((select rowid from llx_categorie where label="Desserts"),(select rowid from llx_product where ref="D3"));
 insert into llx_product_stock(tms,fk_product,fk_entrepot,reel)
 values(current_timestamp,(select rowid from llx_product where ref="D3"),(select rowid from llx_entrepot where label="E1"),10);
+
+*/
