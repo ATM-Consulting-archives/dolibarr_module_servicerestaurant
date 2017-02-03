@@ -71,6 +71,25 @@ foreach($commande->lines as $line)
 {
     echo $line->description."<br>";
 }
+/*
+ * test Categ Résumé -> list de produit 
+*/
+$T_id_product=$servicerestaurant->getProductFromOrder(1);
+print_r($T_id_product);
+foreach($T_id_product as $subC)
+{
+    $product=new Product($db);
+    $product->fetch($subC);
+    echo ("<div style='text-indent: 15px;'>$product->label :</div> "
+            . "<div style='text-indent: 30px;'> -desc : $product->description</div>"
+            . "<div style='text-indent: 30px;'> -prix :".substr($product->price,0,5)."&euro;</div>"
+            . "<div style='text-indent: 30px;'> -stock :$product->stock_reel</div>");
+
+}
+
+
+
+
 echo $servicerestaurant->buttonLeaveModule()."<br>";
 /*$all_cat=$servicerestaurant->getAllProductOrderByCategorie();
 foreach($all_cat as $cat)

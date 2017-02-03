@@ -415,4 +415,31 @@ class ControllerServiceRestaurant
                 }
             }
         }
+
+        /**
+	 *	Function getProductFromOrder
+	 * @param	$table_id	Societe		Dolibarr Societe Object
+	 *
+	 * @return	array with all rowid of the product in the order
+	 */      
+        function getProductFromOrder($table_id)
+        {
+            $commande= new Commande($this->db);
+            $id_commande=$this->getAllCommandesInvalidBySociete($this->db, $table_id)[0];
+            $error_commande=$commande->fetch($id_commande);
+            if($error_commande<0)
+            {
+                return -1;
+            }
+            $T_id_product=array();
+            foreach($commande->lines as $line)
+            {
+                $ref_product=explode(" - ",$line->description)[0];       
+                $product= new Product($this->db);
+                echo $product->fetch('',$ref_product);
+                $T_id_product[]=$product->id;           
+            }           
+            echo "<br>$T_id_product<br>"; 
+            return $T_id_product;
+        }
 }
