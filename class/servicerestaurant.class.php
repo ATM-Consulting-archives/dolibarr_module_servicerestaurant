@@ -104,8 +104,12 @@ class ControllerServiceRestaurant
         function getAllCommandesInvalidBySociete($db,$table_id)
         {
             $sql="Select rowid from ".MAIN_DB_PREFIX."commande where fk_soc= $table_id and fk_user_valid is null order by date_creation DESC;";
-            $stmt=$this->db->query($sql);
-            $Tid_order;
+            $stmt=$db->query($sql);
+            $Tid_order=array();
+            if($stmt->num_rows==0)
+            {
+                return array();
+            }
             foreach($stmt as $row)
             {
                 $Tid_order[]=$row['rowid'];
@@ -126,7 +130,10 @@ class ControllerServiceRestaurant
             {
                 return $restaurant;
             }
-            else return -1;
+            else 
+            {
+                return -1;
+            }
         }
 
         /**
@@ -338,63 +345,74 @@ class ControllerServiceRestaurant
         }
         /**
          *
-         * @param $id_ord id of order
+         * @param $table_id id of table
          * @param $id_product  id of the product we add to the order
 	 *
 	 * @return	int		(0 <= error, 1 = OK)
          */
-        function addProduct($id_ord, $id_product){
+        function addProduct($table_id, $id_product){
             $commande = new Commande($this->db);
-            $error_commande=$commande->fetch($id_ord);
+            $commande_id=$this->getAllCommandesInvalidBySociete($this->db, $table_id)[0];
+            $error_commande=$commande->fetch($commande_id);
             if($error_commande<0)
             {
                 return -1;
             }
             $product=new Product($this->db);
-            $error_product=$commande->fetch($id_product);
+            $error_product=$product->fetch($id_product);
             if($error_product<0)
             {
-                return -1;
+                return -2;
             }
             foreach($commande->lines as $line)
             {
-                echo "<br>test".$line->ref;
-                if($line->ref == $product->ref)
+                //echo "<br>$line->ref ref".$product->ref."<br>desc".$product->description."<br>pu".$product->price."<br>qty".$line->qty."<br>remise0<br>tva".$product->txtva;
+                if($line->description == $product->ref." - ".$product->label)
                 {
-                    $commande->updateline($line->id, $line->desc, $line->pu, $line->qty+1, $line->remise_percent, $line->txtva);
+                    $commande->updateline($line->id, $product->ref." - ".$product->label, $product->price, $line->qty+1, 0, $product->tva_tx);
                     return 1;                
                 }
             }
-            $commande->addline($product->desc, $product->pu_ht, 1, $product->txtva);
+            $commande->addline($product->ref." - ".$product->label, $product->price, 1, $product->tva_tx);
             return 2;
         }
         
         /**
          *
-         * @param $id_ord id of order
+         * @param $table_id id of table
          * @param $id_product  id of the product we remove from the order
          */
-        function removeProduct($id_ord,$id_product)
+        function removeProduct($table_id,$id_product)
         {
             $commande = new Commande($this->db);
-            $error_commande=$commande->fetch($id_ord);
+            $commande_id=$this->getAllCommandesInvalidBySociete($this->db, $table_id)[0];
+            $error_commande=$commande->fetch($commande_id);
             if($error_commande<0)
             {
                 return -1;
             }
-            if(getLine($id_ord,$id_product)){
-                $product=getLine($id_ord,$id_product);
-                if($product->qty>1)
+            $product=new Product($this->db);
+            $error_product=$product->fetch($id_product);
+            if($error_product<0)
+            {
+                return -2;
+            }
+            foreach($commande->lines as $line)
+            {
+                //echo "<br>$line->ref ref".$product->ref."<br>desc".$product->description."<br>pu".$product->price."<br>qty".$line->qty."<br>remise0<br>tva".$product->txtva;
+                if($line->description == $product->ref." - ".$product->label)
                 {
-                    $product->qty=$product->qty-1;
-                    putLine($id_ord,$id_product,$product);
-                    return $product->qty;
-                }
-                else
-                {
-                    delLine($id_ord,$id_product);
+                    if($line->qty>1)
+                    {
+                        $commande->updateline($line->id, $product->ref." - ".$product->label, $product->price, $line->qty-1, 0, $product->tva_tx);
+                        return 1;  
+                    }
+                    else
+                    {
+                        $commande->deleteline($line->id);
+                        return 2;
+                    }
                 }
             }
-            return 1;
         }
 }

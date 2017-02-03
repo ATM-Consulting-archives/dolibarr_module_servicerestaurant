@@ -34,14 +34,14 @@ foreach($categ as $cat)
 
     }
 }
-$servicerestaurant->generate_order(1);
-$Tcmd=$servicerestaurant->getAllCommandesInvalidBySociete($db,1);
+//$servicerestaurant->generate_order(1);
+//$Tcmd=$servicerestaurant->getAllCommandesInvalidBySociete($db,1);
 //echo("<br>cmd :".$Tcmd[0]);
-$id_commande=$servicerestaurant->update_order(1);
+//$id_commande=$servicerestaurant->update_order(1);
 //echo "<br>cmd :".$id_commande."<br>";
 
-$servicerestaurant->valiate_order(1);
-$Tcmd=$servicerestaurant->getAllCommandesInvalidBySociete($db,1);
+//$servicerestaurant->valiate_order(1);
+//$Tcmd=$servicerestaurant->getAllCommandesInvalidBySociete($db,1);
 //echo("<br>cmd :".$Tcmd[0]);
 
 $table=$servicerestaurant->getsAllTables();
@@ -51,23 +51,25 @@ foreach($table as $t)
 {
     $T_table_id[]=$t->id;
 }
-var_dump($T_table_id);
-
+$prodfuct=new Product($db);
+$product->fetch(1);
+echo "<br>".$product->ref." - ".$product->label."<br>";
 $servicerestaurant->showTables();
+$id_commande=$servicerestaurant->update_order(1);
 $commande=new Commande($db);
-$commande->fetch(29);
+$commande->fetch($id_commande);
+$servicerestaurant->addProduct(1,4);
+$servicerestaurant->addProduct(1,1);
+$servicerestaurant->addProduct(1,5);
+//uncomment the 3 ligne to remove product
+/*$servicerestaurant->removeProduct(1,4);
+$servicerestaurant->removeProduct(1,1);
+$servicerestaurant->removeProduct(1,5);*/
+$commande->fetch($id_commande);
+echo "<br>";
 foreach($commande->lines as $line)
 {
-    print_r($line->ref);
-}
-$p= new Product($db);
-$p->fetch(2);
-echo $p->ref;
-$t=$servicerestaurant->addProduct(29,4);
-echo "<br>return:".$t."<br>".$servicerestaurant->addProduct(29,4)."<br>";
-foreach($commande->lines as $line)
-{
-    print_r($line->id);
+    echo $line->description."<br>";
 }
 echo $servicerestaurant->buttonLeaveModule()."<br>";
 /*$all_cat=$servicerestaurant->getAllProductOrderByCategorie();
