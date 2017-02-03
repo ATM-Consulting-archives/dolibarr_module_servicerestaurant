@@ -56,7 +56,19 @@ var_dump($T_table_id);
 $servicerestaurant->showTables();
 $commande=new Commande($db);
 $commande->fetch(29);
-$T_line=$commande->getLinesArray();
+foreach($commande->lines as $line)
+{
+    print_r($line->ref);
+}
+$p= new Product($db);
+$p->fetch(2);
+echo $p->ref;
+$t=$servicerestaurant->addProduct(29,4);
+echo "<br>return:".$t."<br>".$servicerestaurant->addProduct(29,4)."<br>";
+foreach($commande->lines as $line)
+{
+    print_r($line->id);
+}
 echo $servicerestaurant->buttonLeaveModule()."<br>";
 /*$all_cat=$servicerestaurant->getAllProductOrderByCategorie();
 foreach($all_cat as $cat)

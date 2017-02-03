@@ -338,47 +338,63 @@ class ControllerServiceRestaurant
         }
         /**
          *
-         * @param $idcommande id of order
-         * @param $idproduct  id of the product we add to the order
-         */
-        function addProduct($idord, $idproduct){
-        	if(!getLines($idord)){
-        		post($idord);
-        	}
-        	if(!getLine($idord,$idproduct)){
-        		postLine($idord, $idproduct);}
-        		else{
-        			$prod=get($idord,$idproduct);
-        			$prod->qty=$prod->qty+1;
-        			putLine($idord,$idproduct,$prod);
-        		}
-        }
-        
-        /**
-         *
          * @param $id_ord id of order
-         * @param $id_prod  id of the product we remove from the order
+         * @param $id_product  id of the product we add to the order
+	 *
+	 * @return	int		(0 <= error, 1 = OK)
          */
-        function removeProduct($id_ord,$id_prod){
+        function addProduct($id_ord, $id_product){
             $commande = new Commande($this->db);
             $error_commande=$commande->fetch($id_ord);
             if($error_commande<0)
             {
                 return -1;
             }
-            if(getLine($id_ord,$id_prod)){
-                    $product=getLine($id_ord,$id_prod);
-                    if($product->qty>1)
-                    {
-                        $product->qty=$product->qty-1;
-                        putLine($id_ord,$id_prod,$product);
-                        return $product->qty;
-                    }
-                    else
-                    {
-                        delLine($id_ord,$id_prod);
-                    }
+            $product=new Product($this->db);
+            $error_product=$commande->fetch($id_product);
+            if($error_product<0)
+            {
+                return -1;
             }
-            return 0;
+            foreach($commande->lines as $line)
+            {
+                echo "<br>test".$line->ref;
+                if($line->ref == $product->ref)
+                {
+                    $commande->updateline($line->id, $line->desc, $line->pu, $line->qty+1, $line->remise_percent, $line->txtva);
+                    return 1;                
+                }
+            }
+            $commande->addline($product->desc, $product->pu_ht, 1, $product->txtva);
+            return 2;
+        }
+        
+        /**
+         *
+         * @param $id_ord id of order
+         * @param $id_product  id of the product we remove from the order
+         */
+        function removeProduct($id_ord,$id_product)
+        {
+            $commande = new Commande($this->db);
+            $error_commande=$commande->fetch($id_ord);
+            if($error_commande<0)
+            {
+                return -1;
+            }
+            if(getLine($id_ord,$id_product)){
+                $product=getLine($id_ord,$id_product);
+                if($product->qty>1)
+                {
+                    $product->qty=$product->qty-1;
+                    putLine($id_ord,$id_product,$product);
+                    return $product->qty;
+                }
+                else
+                {
+                    delLine($id_ord,$id_product);
+                }
+            }
+            return 1;
         }
 }
