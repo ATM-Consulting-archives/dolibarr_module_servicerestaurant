@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <title>Module restauration</title>
+    <meta charset="UTF-8">
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
