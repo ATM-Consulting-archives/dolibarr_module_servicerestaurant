@@ -366,14 +366,14 @@ class ControllerServiceRestaurant
             }
             foreach($commande->lines as $line)
             {
-                //echo "<br>$line->ref ref".$product->ref."<br>desc".$product->description."<br>pu".$product->price."<br>qty".$line->qty."<br>remise0<br>tva".$product->txtva;
                 if($line->description == $product->ref." - ".$product->label)
                 {
                     $commande->updateline($line->id, $product->ref." - ".$product->label, $product->price, $line->qty+1, 0, $product->tva_tx);
                     return 1;                
                 }
             }
-            $commande->addline($product->ref." - ".$product->label, $product->price, 1, $product->tva_tx);
+            //$commande->addline($product->ref." - ".$product->label, $product->price, 1, $product->tva_tx);
+            $commande->addline($product->ref." - ".$product->label, $product->price, 1, $product->tva_tx, 0, 0, $product->id, 0, 0, 0, 'HT', 0, '', '', 0, -1, 0, 0,null, 0, $label='');
             return 2;
         }
         
@@ -399,7 +399,6 @@ class ControllerServiceRestaurant
             }
             foreach($commande->lines as $line)
             {
-                //echo "<br>$line->ref ref".$product->ref."<br>desc".$product->description."<br>pu".$product->price."<br>qty".$line->qty."<br>remise0<br>tva".$product->txtva;
                 if($line->description == $product->ref." - ".$product->label)
                 {
                     if($line->qty>1)
@@ -429,17 +428,16 @@ class ControllerServiceRestaurant
             $error_commande=$commande->fetch($id_commande);
             if($error_commande<0)
             {
-                return -1;
+                return array();
             }
             $T_id_product=array();
             foreach($commande->lines as $line)
             {
                 $ref_product=explode(" - ",$line->description)[0];       
                 $product= new Product($this->db);
-                echo $product->fetch('',$ref_product);
+                $product->fetch('',$ref_product);
                 $T_id_product[]=$product->id;           
             }           
-            echo "<br>$T_id_product<br>"; 
             return $T_id_product;
         }
 }

@@ -53,7 +53,7 @@ foreach($table as $t)
 }
 $prodfuct=new Product($db);
 $product->fetch(1);
-echo "<br>".$product->ref." - ".$product->label."<br>";
+//echo "<br>".$product->ref." - ".$product->label."<br>";
 $servicerestaurant->showTables();
 $id_commande=$servicerestaurant->update_order(1);
 $commande=new Commande($db);
@@ -69,13 +69,13 @@ $commande->fetch($id_commande);
 echo "<br>";
 foreach($commande->lines as $line)
 {
-    echo $line->description."<br>";
+    echo "$line->description<br>"
+         ."qty : $line->qty<br>";
 }
 /*
  * test Categ Résumé -> list de produit 
 */
 $T_id_product=$servicerestaurant->getProductFromOrder(1);
-print_r($T_id_product);
 foreach($T_id_product as $subC)
 {
     $product=new Product($db);
