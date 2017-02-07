@@ -1,5 +1,30 @@
 <?php include_once('include/menu.php'); ?>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+        <img alt="logo" src="img/logo.png">
+      </a>
+    </div>
 
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="navbar">
+    <a class="navbar-brand" href="#">Restaurant's name</a>
+      <a class="navbar-brand text-center" style="width: 80%;" href="#">Choisissez une table</a>
+
+
+    <ul class="nav navbar-nav navbar-right">
+      <li><?php echo $servicerestaurant->buttonLeaveModule(); ?></li>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</nav>
       <!-- MODAL A : Prendre une nouvelle commande -->
       <div class="modal fade position-modal" id="myModalNew" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
         <div class="modal-dialog">
@@ -29,17 +54,10 @@
         </div>
       </div> <!-- /. Fin Modal -->
 
-      <!-- Titre -->
-      <h2 class="text-center title">
-        Choisissez une table<br>
-        <span class="fa-stack ">
-            <i class="fa fa-angle-down fa-stack-2x faa-float animated blue"></i>
-        </span>
-      </h2>
 
       <!-- Légende couleurs -->
       <div class="row">
-        <div class="col-lg-10 col-lg-offset-1 legend">
+        <div class="col-lg-10 col-lg-offset-1 legend" style=" margin-top: 100px;">
           <div class="col-lg-6 text-center occupe">
             <p>Occupé</p>
           </div>
@@ -53,152 +71,7 @@
       <div class="flux-cat col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 ">
         <div class="row">
           <div class="row">
-            <div class="container-square" name="occupe">
-              <div class="square" style="background-size: cover;">
-                <a href="#" data-toggle="modal" data-target="">
-                <div class="square__content">
-                  <?php echo $servicerestaurant->update_order(2);?>
-                  TABLE
-                </div>
-                </a>
-              </div>
-            </div>
-            <div class="container-square" name="libre">
-              <div class="square" style="background-size: cover;">
-                <a href="#" data-toggle="modal" data-target="">
-                <div class="square__content">
-                  TABLE
-                </div>
-                </a>
-              </div>
-            </div>
-            <div class="container-square" name="libre">
-              <div class="square" style="background-size: cover;">
-                <a href="#" data-toggle="modal" data-target="">
-                <div class="square__content">
-                  TABLE
-                </div>
-                </a>
-              </div>
-            </div>
-            <div class="container-square" name="occupe">
-              <div class="square" style="background-size: cover;">
-                <a href="#" data-toggle="modal" data-target="">
-                <div class="square__content">
-                  TABLE
-                </div>
-                </a>
-              </div>
-            </div>
-            <div class="container-square" name="occupe">
-              <div class="square" style="background-size: cover;">
-                <a href="#" data-toggle="modal" data-target="">
-                <div class="square__content">
-                  TABLE
-                </div>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="row">
-            <div class="container-square" name="occupe">
-              <div class="square" style="background-size: cover;">
-                <a href="#" data-toggle="modal" data-target="">
-                <div class="square__content">
-                  TABLE
-                </div>
-                </a>
-              </div>
-            </div>
-            <div class="container-square" name="occupe">
-              <div class="square" style="background-size: cover;">
-                <a href="#" data-toggle="modal" data-target="">
-                <div class="square__content">
-                  TABLE
-                </div>
-                </a>
-              </div>
-            </div>
-            <div class="container-square">
-              <div class="square" style="background-size: cover;">
-                <a href="#" data-toggle="modal" data-target="">
-                <div class="square__content">
-                  TABLE
-                </div>
-                </a>
-              </div>
-            </div>
-            <div class="container-square">
-              <div class="square" style="background-size: cover;">
-                <a href="#" data-toggle="modal" data-target="">
-                <div class="square__content">
-                  TABLE
-                </div>
-                </a>
-              </div>
-            </div>
-            <div class="container-square">
-              <div class="square" style="background-size: cover;">
-                <a href="#" data-toggle="modal" data-target="">
-                <div class="square__content">
-                  TABLE
-                </div>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="row">
-            <div class="container-square">
-              <div class="square" style="background-size: cover;">
-                <a href="#" data-toggle="modal" data-target="">
-                <div class="square__content">
-                  TABLE
-                </div>
-                </a>
-              </div>
-            </div>
-            <div class="container-square">
-              <div class="square" style="background-size: cover;">
-                <a href="#" data-toggle="modal" data-target="">
-                <div class="square__content">
-                  TABLE
-                </div>
-                </a>
-              </div>
-            </div>
-            <div class="container-square">
-              <div class="square" style="background-size: cover;">
-                <a href="#" data-toggle="modal" data-target="">
-                <div class="square__content">
-                  TABLE
-                </div>
-                </a>
-              </div>
-            </div>
-            <div class="container-square" name="occupe">
-              <div class="square" style="background-size: cover;">
-                <a href="#" data-toggle="modal" data-target="">
-                <div class="square__content">
-                  TABLE
-                </div>
-                </a>
-              </div>
-            </div>
-            <div class="container-square" name="libre">
-              <div class="square" style="background-size: cover;">
-                <a href="#" data-toggle="modal" data-target="">
-                <div class="square__content">
-                  TABLE
-                </div>
-                </a>
-              </div>
-            </div>
+            <?php $servicerestaurant->showTables(); ?>
           </div>
         </div>
       </div>

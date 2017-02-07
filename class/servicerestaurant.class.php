@@ -130,7 +130,7 @@ class ControllerServiceRestaurant
             {
                 return $restaurant;
             }
-            else 
+            else
             {
                 return -1;
             }
@@ -323,25 +323,35 @@ class ControllerServiceRestaurant
         {
             return "<a href='".DOL_URL_ROOT."'>Retour vers Dolibarr</a>";
         }
-        
+
         function showTables(){
         	$tables=$this->getsAllTables();
         	foreach ($tables as $tab){
-        		echo "<input type='button' id='$tab->id ' name='".$tab->name."' value='".$tab->name."' />";
+        		echo "
+						<div class=\"container-square\" name=\"libre\">
+              <div class=\"square\" style=\"background-size: cover;\">
+                <a href=\"#\" data-toggle=\"modal\" data-target=\"\">
+                <div class=\"square__content\">
+                  $tab->name
+                </div>
+                </a>
+              </div>
+            </div>
+						";
         	}
-        
+
         }
         /**
          * @return all the tables in an array
          */
-        
+
         function getsAllTables(){
             $categorie= new Categorie($this->db);
             $error_categorie=$categorie->fetch("","Tables");
-            if($error_categorie<0) return 0;            
-            $T_Table=$categorie->getObjectsInCateg("customer");        	
+            if($error_categorie<0) return 0;
+            $T_Table=$categorie->getObjectsInCateg("customer");
             return $T_Table;
-        
+
         }
         /**
          *
@@ -369,14 +379,14 @@ class ControllerServiceRestaurant
                 if($line->description == $product->ref." - ".$product->label)
                 {
                     $commande->updateline($line->id, $product->ref." - ".$product->label, $product->price, $line->qty+1, 0, $product->tva_tx);
-                    return 1;                
+                    return 1;
                 }
             }
             //$commande->addline($product->ref." - ".$product->label, $product->price, 1, $product->tva_tx);
             $commande->addline($product->ref." - ".$product->label, $product->price, 1, $product->tva_tx, 0, 0, $product->id, 0, 0, 0, 'HT', 0, '', '', 0, -1, 0, 0,null, 0, $label='');
             return 2;
         }
-        
+
         /**
          *
          * @param $table_id id of table
@@ -404,7 +414,7 @@ class ControllerServiceRestaurant
                     if($line->qty>1)
                     {
                         $commande->updateline($line->id, $product->ref." - ".$product->label, $product->price, $line->qty-1, 0, $product->tva_tx);
-                        return 1;  
+                        return 1;
                     }
                     else
                     {
@@ -420,7 +430,7 @@ class ControllerServiceRestaurant
 	 * @param	$table_id	Societe		Dolibarr Societe Object
 	 *
 	 * @return	array with all rowid of the product in the order
-	 */      
+	 */
         function getProductFromOrder($table_id)
         {
             $commande= new Commande($this->db);
@@ -433,11 +443,11 @@ class ControllerServiceRestaurant
             $T_id_product=array();
             foreach($commande->lines as $line)
             {
-                $ref_product=explode(" - ",$line->description)[0];       
+                $ref_product=explode(" - ",$line->description)[0];
                 $product= new Product($this->db);
                 $product->fetch('',$ref_product);
-                $T_id_product[]=$product->id;           
-            }           
+                $T_id_product[]=$product->id;
+            }
             return $T_id_product;
         }
 }

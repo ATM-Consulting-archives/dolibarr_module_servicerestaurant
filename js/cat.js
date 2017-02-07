@@ -14,11 +14,11 @@ $(document).ready(function() {
       },
       success:function(data){
         //alert($(data).find('#section *'));
-        $("#allProducts").empty().hide();
+        $("#allProducts").empty().hide(0);
         $("#allProducts").append($(data).find('#section'));
         //on affiche les resultats avec la transition
-        $('#allProducts').fadeIn(100);
+        $('#allProducts').show(0);
       }
     });
   });
-})
+});

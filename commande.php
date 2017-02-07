@@ -26,6 +26,33 @@
       }
       </style>
 
+      <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+              <img alt="logo" src="img/logo.png">
+            </a>
+          </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar">
+          <a class="navbar-brand" href="#">Restaurant's name</a>
+            <a class="navbar-brand text-center" style="width: 80%;" href="#">Commande N°1</a>
+
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><?php echo $servicerestaurant->buttonLeaveModule(); ?></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+      </nav>
+
       <div class="main-wrap">
           <!-- Ouvrir / Fermer le menu sidebar catégories roduits -->
           <input id="slide-sidebar" type="checkbox" role="button" />
@@ -35,6 +62,7 @@
           <div class="sidebar">
 
             <ul>
+              <a class="chercher" href="#all" name="ALL"><li>ALL</li></a>
               <?php
               $categ=$servicerestaurant->getAllProductsCategories();
               foreach($categ as $cat)
@@ -54,15 +82,9 @@
 
           <!-- Titre -->
           <div class="main-container">
-            <h2 class="text-center">
-              Comande n°1<br>
-              <span class="fa-stack ">
-                  <i class="fa fa-angle-down fa-stack-2x faa-float animated blue"></i>
-              </span>
-            </h2>
-            <div id="allProducts" >
 
-            </div> <!-- All Products -->
+            
+            <div id="allProducts" >
             <?php
             foreach($categ as $cat)
             {
@@ -100,7 +122,7 @@
                 }
             }
             ?>
-
+            </div> <!-- All Products -->
 
           </div>
       </div>
