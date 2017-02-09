@@ -325,20 +325,27 @@ class ControllerServiceRestaurant
         }
 
         function showTables(){
+                $html='';
         	$tables=$this->getsAllTables();
         	foreach ($tables as $tab){
-        		echo "
-						<div class=\"container-square\" name=\"libre\">
-              <div class=\"square\" style=\"background-size: cover;\">
-                <a href=\"#\" data-toggle=\"modal\" data-target=\"\">
-                <div class=\"square__content\">
-                  $tab->name
-                </div>
-                </a>
-              </div>
-            </div>
-						";
+                    if($this->getAllCommandesInvalidBySociete($this->db, $tab->id)== array())
+                    {
+                        $html.= "<div class=\"container-square\" name=\"libre\">";
+                    }
+                    else
+                    {
+                        $html.= "<div class=\"container-square\" name=\"occupe\">";
+                    }
+                    $html.="<div class=\"square\" style=\"background-size: cover;\">
+                                <a href=\"#\" data-toggle=\"modal\" data-target=\"\">
+                                    <div class=\"square__content\">
+                                        $tab->name
+                                    </div>
+                                </a>
+                            </div>
+                        </div>";
         	}
+                echo $html;
 
         }
         /**

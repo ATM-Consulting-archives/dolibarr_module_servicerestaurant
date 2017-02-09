@@ -98,7 +98,7 @@
                     <div class="col-lg-4 col-sm-12">
                       <h3 style="margin: 0px;"><?php echo $product->label; ?></h3>
                       <p><?php echo $product->description; ?></p>
-                      <p><br><b>Stock disponible : <input type="text" name="stock" value="<?php echo substr($product->price,0,5); ?>" style="background-color: rgba(255,255,255,0); border: none;"></b></p>
+                      <p><br><b>Stock disponible : <input type="text" name="stock" value="<?php echo substr($product->price,0,5)." (".substr($product->price-$servicerestaurant->getProductQuantityFromOrder(/*ID DE LA TABLE*/1,$product->id),0,5)." restant(s))"; ?>" style="background-color: rgba(255,255,255,0); border: none;"></b></p>
                     </div>
                     <div class="col-lg-4 col-sm-12" style="height: 120px;">
                       <textarea style="margin: 0px; height: 120px; width: 100%; border: none; padding: 15px;" class="col-lg-12 infos-sup" name="name" rows="8" cols="80" placeholder="Ajouter des informations complémentaires"></textarea>
