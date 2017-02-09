@@ -455,4 +455,28 @@ class ControllerServiceRestaurant
             }
             return $T_id_product;
         }
+        
+        function getProductQuantityFromOrder($table_id, $id_product){
+            $commande = new Commande($this->db);
+            $commande_id=$this->getAllCommandesInvalidBySociete($this->db, $table_id)[0];
+            $error_commande=$commande->fetch($commande_id);
+            if($error_commande<0)
+            {
+                return -1;
+            }
+            $product=new Product($this->db);
+            $error_product=$product->fetch($id_product);
+            if($error_product<0)
+            {
+                return -2;
+            }
+            foreach($commande->lines as $line)
+            {
+                if($line->description == $product->ref." - ".$product->label)
+                {
+                    return $line->qty;
+                }
+            }
+            return 0;
+        }
 }

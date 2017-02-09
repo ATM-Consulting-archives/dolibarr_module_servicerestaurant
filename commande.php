@@ -86,6 +86,38 @@
             
             <div id="allProducts" >
             <?php
+            $categorie->fetch($cat);
+            if($_GET['cat'] == "Résumé") {
+              $subCat=$servicerestaurant->getProductFromOrder(/*ID DE LA TABLE*/1);
+              foreach($subCat as $subC)
+              {
+                  $product=new Product($db);
+                  $product->fetch($subC);
+                  ?>
+                  <section id="section"class="col-lg-12 col-sm-12 produits" style="height: auto; margin-bottom: 50px; background-color: #d1d5d8; padding-top: 20px; padding-left: 10px; padding-right: 10px; padding-bottom: 20px;">
+                    <div class="col-lg-4 col-sm-12">
+                      <h3 style="margin: 0px;"><?php echo $product->label; ?></h3>
+                      <p><?php echo $product->description; ?></p>
+                      <p><br><b>Stock disponible : <input type="text" name="stock" value="<?php echo substr($product->price,0,5); ?>" style="background-color: rgba(255,255,255,0); border: none;"></b></p>
+                    </div>
+                    <div class="col-lg-4 col-sm-12" style="height: 120px;">
+                      <textarea style="margin: 0px; height: 120px; width: 100%; border: none; padding: 15px;" class="col-lg-12 infos-sup" name="name" rows="8" cols="80" placeholder="Ajouter des informations complémentaires"></textarea>
+                    </div>
+                    <div class="col-lg-4 col-sm-12">
+                      <div class="col-lg-4 col-sm-4 moins" style="cursor: pointer; background-color: #3c8eb9; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
+                        -
+                      </div>
+                      <div class="col-lg-4 col-sm-4 count" style="background-color: white; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
+                        <?php echo $servicerestaurant->getProductQuantityFromOrder(/*ID DE LA TABLE*/1,$product->id);?>
+                      </div>
+                      <div class="col-lg-4 col-sm-4 plus" style="cursor: pointer; background-color: #3c8eb9; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
+                        +
+                      </div>
+                    </div>
+                  </section>
+                  <?php
+              }
+            }
             foreach($categ as $cat)
             {
                 $categorie->fetch($cat);
