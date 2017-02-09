@@ -1,5 +1,7 @@
 <?php
 
+
+
 dol_include_once('/product/class/product.class.php');
 dol_include_once('/commande/class/commande.class.php');
 dol_include_once("/categories/class/categorie.class.php");
@@ -372,7 +374,7 @@ class ControllerServiceRestaurant
             $commande_id=$this->getAllCommandesInvalidBySociete($this->db, $table_id)[0];
             if($commande_id=='')
             {
-                $commande_id=$this->generate_order($table_id); 
+                $commande_id=$this->generate_order($table_id);
             }
             $error_commande=$commande->fetch($commande_id);
             if($error_commande<0)
@@ -401,7 +403,7 @@ class ControllerServiceRestaurant
          *
          * @param $table_id id of table
          * @param $id_product  id of the product we remove from the order
-         * 
+         *
 	 * @return	int		(0 < error, 0 <= OK)
          */
         function removeProduct($table_id,$id_product)
@@ -462,7 +464,7 @@ class ControllerServiceRestaurant
             }
             return $T_id_product;
         }
-        
+
         function getProductQuantityFromOrder($table_id, $id_product){
             $commande = new Commande($this->db);
             $commande_id=$this->getAllCommandesInvalidBySociete($this->db, $table_id)[0];

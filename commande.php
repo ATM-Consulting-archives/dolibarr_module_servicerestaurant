@@ -83,7 +83,7 @@
           <!-- Titre -->
           <div class="main-container">
 
-            
+
             <div id="allProducts" >
             <?php
             $categorie->fetch($cat);
@@ -132,20 +132,39 @@
                         <div class="col-lg-4 col-sm-12">
                           <h3 style="margin: 0px;"><?php echo $product->label; ?></h3>
                           <p><?php echo $product->description; ?></p>
-                          <p><br><b>Stock disponible : <input type="text" name="stock" value="<?php echo substr($product->price,0,5); ?>" style="background-color: rgba(255,255,255,0); border: none;"></b></p>
+                          <p><br><b>Stock disponible : <input type="text" name="stock" value="<?php echo substr($product->price,0,5)." (".substr($product->price-$servicerestaurant->getProductQuantityFromOrder(/*ID DE LA TABLE*/1,$product->id),0,5)." restant(s))"; ?>" style="background-color: rgba(255,255,255,0); border: none;"></b></p>
                         </div>
                         <div class="col-lg-4 col-sm-12" style="height: 120px;">
                           <textarea style="margin: 0px; height: 120px; width: 100%; border: none; padding: 15px;" class="col-lg-12 infos-sup" name="name" rows="8" cols="80" placeholder="Ajouter des informations complémentaires"></textarea>
                         </div>
                         <div class="col-lg-4 col-sm-12">
                           <div class="col-lg-4 col-sm-4 moins" style="cursor: pointer; background-color: #3c8eb9; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
-                            -
+                            <?php
+                              echo "<a href=\"commande.php?cat=$categorie->label&add=moins\">-</a>";
+                             ?>
                           </div>
                           <div class="col-lg-4 col-sm-4 count" style="background-color: white; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
-                            0
+                           <?php
+                           if ($_GET['add'] == "plus") {
+                             echo $servicerestaurant->addProduct(/*ID DE LA TABLE*/1,$product->id);
+                           }
+                           elseif ($_GET['add'] == "moins") {
+                             echo $servicerestaurant->removeProduct(/*ID DE LA TABLE*/1,$product->id);
+                           }
+                           else {
+                             if ($product->price-$servicerestaurant->getProductQuantityFromOrder(/*ID DE LA TABLE*/1,$product->id) == "0") {
+                               echo "0";
+                             }
+                             else {
+                               $product->price-$servicerestaurant->getProductQuantityFromOrder(/*ID DE LA TABLE*/1,$product->id);
+                             }
+                           }
+                           ?>
                           </div>
-                          <div class="col-lg-4 col-sm-4 plus" style="cursor: pointer; background-color: #3c8eb9; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
-                            +
+                          <div id="plus" class="col-lg-4 col-sm-4 plus" style="cursor: pointer; background-color: #3c8eb9; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
+                            <?php
+                              echo "<a href=\"commande.php?cat=$categorie->label&add=plus\">+</a>";
+                             ?>
                           </div>
                         </div>
                       </section>
@@ -162,9 +181,9 @@
       <script src="less/dist/less.js" type="text/javascript"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript"></script>
-      <script src="js/color.js"></script>
+      <!-- <script src="js/color.js"></script> -->
       <script src="js/cat.js"></script>
-
+      <!-- <script src="js/buttons.js"></script> -->
 
   </body>
 </html>
