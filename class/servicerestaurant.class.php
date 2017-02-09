@@ -374,7 +374,8 @@ class ControllerServiceRestaurant
             $commande_id=$this->getAllCommandesInvalidBySociete($this->db, $table_id)[0];
             if($commande_id=='')
             {
-                $commande_id=$this->generate_order($table_id);
+                $this->generate_order($table_id);
+                $this->addProduct($table_id, $id_product);
             }
             $error_commande=$commande->fetch($commande_id);
             if($error_commande<0)
@@ -467,6 +468,10 @@ class ControllerServiceRestaurant
         function getProductQuantityFromOrder($table_id, $id_product){
             $commande = new Commande($this->db);
             $commande_id=$this->getAllCommandesInvalidBySociete($this->db, $table_id)[0];
+            if($commande_id=='')
+            {
+                return 0;
+            }
             $error_commande=$commande->fetch($commande_id);
             if($error_commande<0)
             {

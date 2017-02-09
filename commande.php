@@ -19,6 +19,7 @@
     if($action=='valid')
     {
         $servicerestaurant->validate_order($fk_table);
+        header('Location:'.DOL_URL_ROOT.'/dolibarr_module_servicerestaurant/tables.php');
     }
 ?>
 
@@ -113,12 +114,17 @@
                 {
                     $product=new Product($db);
                     $product->fetch($product_id);
+                    $productStock=$product->stock_reel;
+                    if(!is_numeric($productStock))
+                    {
+                        $productStock=0;
+                    }
                     ?>
                     <section id="section"class="col-lg-12 col-sm-12 produits" style="height: auto; margin-bottom: 50px; background-color: #d1d5d8; padding-top: 20px; padding-left: 10px; padding-right: 10px; padding-bottom: 20px;">
                       <div class="col-lg-4 col-sm-12">
                         <h3 style="margin: 0px;"><?php echo $product->label; ?></h3>
                         <p><?php echo $product->description; ?></p>
-                        <p><br><b>Stock disponible : <input type="text" name="stock" value="<?php echo $product->stock_reel.' ('.($product->stock_reel-$servicerestaurant->getProductQuantityFromOrder($fk_table,$product->id))." restant(s))"; ?>" style="background-color: rgba(255,255,255,0); border: none;"></b></p>
+                        <p><br><b>Stock disponible : <input type="text" name="stock" value="<?php echo $productStock.' ('.($productStock-$servicerestaurant->getProductQuantityFromOrder($fk_table,$product->id))." restant(s))"; ?>" style="background-color: rgba(255,255,255,0); border: none;"></b></p>
                       </div>
                       <div class="col-lg-4 col-sm-12" style="height: 120px;">
                         <textarea style="margin: 0px; height: 120px; width: 100%; border: none; padding: 15px;" class="col-lg-12 infos-sup" name="name" rows="8" cols="80" placeholder="Ajouter des informations complémentaires"></textarea>
@@ -147,12 +153,17 @@
                     {
                         $product=new Product($db);
                         $product->fetch($product_id);
+                        $productStock=$product->stock_reel;
+                        if(!is_numeric($productStock))
+                        {
+                            $productStock=0;
+                        }
                         ?>
                         <section id="section"class="col-lg-12 col-sm-12 produits" style="height: auto; margin-bottom: 50px; background-color: #d1d5d8; padding-top: 20px; padding-left: 10px; padding-right: 10px; padding-bottom: 20px;">
                             <div class="col-lg-4 col-sm-12">
                                 <h3 style="margin: 0px;"><?php echo $product->label; ?></h3>
                                 <p><?php echo $product->description; ?></p>
-                                <p><br><b>Stock disponible : <input type="text" name="stock" value="<?php echo $product->stock_reel.' ('.($product->stock_reel-$servicerestaurant->getProductQuantityFromOrder($fk_table,$product->id))." restant(s))"; ?>" style="background-color: rgba(255,255,255,0); border: none;"></b></p>
+                                <p><br><b>Stock disponible : <input type="text" name="stock" value="<?php echo $productStock.' ('.($productStock-$servicerestaurant->getProductQuantityFromOrder($fk_table,$product->id))." restant(s))"; ?>" style="background-color: rgba(255,255,255,0); border: none;"></b></p>
                             </div>
                             <div class="col-lg-4 col-sm-12" style="height: 120px;">
                                 <textarea style="margin: 0px; height: 120px; width: 100%; border: none; padding: 15px;" class="col-lg-12 infos-sup" name="name" rows="8" cols="80" placeholder="Ajouter des informations complémentaires"></textarea>
