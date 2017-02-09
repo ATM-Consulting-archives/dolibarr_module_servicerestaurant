@@ -487,4 +487,9 @@ class ControllerServiceRestaurant
             }
             return 0;
         }
+
+        function buttonBackToTablePage()
+        {
+            return "<a href='".DOL_URL_ROOT."/dolibarr_module_servicerestaurant/tables.php'>Retour vers la séléction des tables</a>";
+        }
 }
