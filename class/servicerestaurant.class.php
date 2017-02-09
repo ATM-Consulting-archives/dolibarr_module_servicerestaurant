@@ -80,7 +80,7 @@ class ControllerServiceRestaurant
 	 *
 	 * @return	int		(0 = error, 1 = OK)
 	 */
-	function valiate_order($table_id)
+	function validate_order($table_id)
         {
             $commande= new Commande($this->db);
             $id_commande=$this->getAllCommandesInvalidBySociete($this->db,$table_id)[0];
@@ -363,6 +363,10 @@ class ControllerServiceRestaurant
         function addProduct($table_id, $id_product){
             $commande = new Commande($this->db);
             $commande_id=$this->getAllCommandesInvalidBySociete($this->db, $table_id)[0];
+            if($commande_id=='')
+            {
+                $commande_id=$this->generate_order($table_id); 
+            }
             $error_commande=$commande->fetch($commande_id);
             if($error_commande<0)
             {
@@ -379,18 +383,19 @@ class ControllerServiceRestaurant
                 if($line->description == $product->ref." - ".$product->label)
                 {
                     $commande->updateline($line->id, $product->ref." - ".$product->label, $product->price, $line->qty+1, 0, $product->tva_tx);
-                    return 1;
+                    return $line->qty+1;
                 }
             }
-            //$commande->addline($product->ref." - ".$product->label, $product->price, 1, $product->tva_tx);
             $commande->addline($product->ref." - ".$product->label, $product->price, 1, $product->tva_tx, 0, 0, $product->id, 0, 0, 0, 'HT', 0, '', '', 0, -1, 0, 0,null, 0, $label='');
-            return 2;
+            return 1;
         }
 
         /**
          *
          * @param $table_id id of table
          * @param $id_product  id of the product we remove from the order
+         * 
+	 * @return	int		(0 < error, 0 <= OK)
          */
         function removeProduct($table_id,$id_product)
         {
@@ -414,12 +419,12 @@ class ControllerServiceRestaurant
                     if($line->qty>1)
                     {
                         $commande->updateline($line->id, $product->ref." - ".$product->label, $product->price, $line->qty-1, 0, $product->tva_tx);
-                        return 1;
+                        return $line->qty-1;
                     }
                     else
                     {
                         $commande->deleteline($line->id);
-                        return 2;
+                        return 0;
                     }
                 }
             }

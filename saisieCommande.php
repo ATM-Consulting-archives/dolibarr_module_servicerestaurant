@@ -55,16 +55,16 @@ $prodfuct=new Product($db);
 $product->fetch(1);
 //echo "<br>".$product->ref." - ".$product->label."<br>";
 $servicerestaurant->showTables();
-$id_commande=$servicerestaurant->update_order(1);
+$id_commande=$servicerestaurant->validate_order(1);
 $commande=new Commande($db);
-$commande->fetch($id_commande);
-$servicerestaurant->addProduct(1,4);
-$servicerestaurant->addProduct(1,1);
-$servicerestaurant->addProduct(1,5);
+//$commande->fetch($id_commande);
+//$servicerestaurant->addProduct(1,4);
+//$servicerestaurant->addProduct(1,1);
+//$servicerestaurant->addProduct(1,5);
 //uncomment the 3 ligne to remove product
-/*$servicerestaurant->removeProduct(1,4);
-$servicerestaurant->removeProduct(1,1);
-$servicerestaurant->removeProduct(1,5);*/
+//$servicerestaurant->removeProduct(1,4);
+//$servicerestaurant->removeProduct(1,1);
+//$servicerestaurant->removeProduct(1,5);
 $commande->fetch($id_commande);
 echo "<br>";
 foreach($commande->lines as $line)
