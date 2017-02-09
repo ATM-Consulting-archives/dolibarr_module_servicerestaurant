@@ -42,7 +42,7 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar">
-          <a class="navbar-brand" href="#">Restaurant's name</a>
+          <a class="navbar-brand" href="#"><?php echo $servicerestaurant->getRestaurant()->description; ?></a>
             <a class="navbar-brand text-center" style="width: 80%;" href="#">Commande N°1</a>
 
 
@@ -62,7 +62,7 @@
           <div class="sidebar">
 
             <ul>
-              <a class="chercher" href="#all" name="ALL"><li>ALL</li></a>
+              <a class="chercher" href="#Resume" name="Résumé"><li>Résumé</li></a>
               <?php
               $categ=$servicerestaurant->getAllProductsCategories();
               foreach($categ as $cat)
