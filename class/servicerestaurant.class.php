@@ -105,7 +105,7 @@ class ControllerServiceRestaurant
 	 */
         function getAllCommandesInvalidBySociete($db,$table_id)
         {
-            $sql="Select rowid from ".MAIN_DB_PREFIX."commande where fk_soc= $table_id and fk_user_valid is null order by date_creation DESC;";
+            $sql="Select rowid from ".MAIN_DB_PREFIX."commande where fk_soc=$table_id and fk_statut=0;";
             $stmt=$db->query($sql);
             $Tid_order=array();
             if($stmt->num_rows==0)
@@ -175,10 +175,10 @@ class ControllerServiceRestaurant
             $cat_error=$categorie->fetch($id_categorie);
             if($cat_error>0)
             {
-                $Tcateg=$categorie->getObjectsInCateg("product");
-                foreach($Tcateg as $categ)
+                $Tproduct=$categorie->getObjectsInCateg("product");
+                foreach($Tproduct as $product)
                 {
-                    $res[]=$categ->id;
+                    $res[$product->label.$product->id]=$product->id;
                 }
                 asort($res);
                 return ($res);
@@ -339,7 +339,7 @@ class ControllerServiceRestaurant
                         $html.= "<div class=\"container-square\" name=\"occupe\">";
                     }
                     $html.="<div class=\"square\" style=\"background-size: cover;\">
-                                <a href=\"#\" data-toggle=\"modal\" data-target=\"\">
+                                <a href=\"#\" data-toggle=\"modal\" data-target=\"\" id=\"table_".$tab->id."\" class=\"table\">
                                     <div class=\"square__content\">
                                         $tab->name
                                     </div>
@@ -389,13 +389,13 @@ class ControllerServiceRestaurant
             }
             foreach($commande->lines as $line)
             {
-                if($line->description == $product->ref." - ".$product->label)
+                if($line->fk_product == $id_product)
                 {
-                    $commande->updateline($line->id, $product->ref." - ".$product->label, $product->price, $line->qty+1, 0, $product->tva_tx);
+                    $commande->updateline($line->id, '', $product->price, $line->qty+1, 0, $product->tva_tx);
                     return $line->qty+1;
                 }
             }
-            $commande->addline($product->ref." - ".$product->label, $product->price, 1, $product->tva_tx, 0, 0, $product->id, 0, 0, 0, 'HT', 0, '', '', 0, -1, 0, 0,null, 0, $label='');
+            $commande->addline('', $product->price, 1, $product->tva_tx, 0, 0, $product->id, 0, 0, 0, 'HT', 0, '', '', 0, -1, 0, 0,null, 0, $label='');
             return 1;
         }
 
@@ -423,11 +423,11 @@ class ControllerServiceRestaurant
             }
             foreach($commande->lines as $line)
             {
-                if($line->description == $product->ref." - ".$product->label)
+                if($line->fk_product == $id_product)
                 {
                     if($line->qty>1)
                     {
-                        $commande->updateline($line->id, $product->ref." - ".$product->label, $product->price, $line->qty-1, 0, $product->tva_tx);
+                        $commande->updateline($line->id, '', $product->price, $line->qty-1, 0, $product->tva_tx);
                         return $line->qty-1;
                     }
                     else
@@ -457,9 +457,8 @@ class ControllerServiceRestaurant
             $T_id_product=array();
             foreach($commande->lines as $line)
             {
-                $ref_product=explode(" - ",$line->description)[0];
                 $product= new Product($this->db);
-                $product->fetch('',$ref_product);
+                $product->fetch($line->fk_product);
                 $T_id_product[]=$product->id;
             }
             return $T_id_product;
@@ -481,7 +480,7 @@ class ControllerServiceRestaurant
             }
             foreach($commande->lines as $line)
             {
-                if($line->description == $product->ref." - ".$product->label)
+                if($id_product==$line->fk_product)
                 {
                     return $line->qty;
                 }

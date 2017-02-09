@@ -9,4 +9,11 @@ $(document).ready(function(){
     $(this).children().css("color","#efefef");
     $(this).children().css("background-color","#d1d5d8");
   });
+  $('.table').on('click',function(){
+     var Tid = $(this).attr('id').split('_');
+     $('#myModalNew a').attr('href',"commande.php?fk_table="+Tid[1]);
+     $('#table_modif').attr('href',"commande.php?fk_table="+Tid[1]);
+     $('#myModalVerif a').attr('href',"commande.php?fk_table="+Tid[1]+"&action=valid");
+          
+  });
 });
