@@ -1,6 +1,8 @@
 <?php
 
 require('config.php');
+require_once DOL_DOCUMENT_ROOT . '/core/lib/functions.lib.php';
+require_once DOL_DOCUMENT_ROOT . '/core/lib/functions2.lib.php';
 
 dol_include_once('/product/class/product.class.php');
 dol_include_once('/commande/class/commande.class.php');

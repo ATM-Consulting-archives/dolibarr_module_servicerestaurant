@@ -17,15 +17,3 @@
 
 </head>
 <body>
-  <?php
-    require '../main.inc.php';
-    require_once DOL_DOCUMENT_ROOT . '/core/lib/functions.lib.php';
-    require_once DOL_DOCUMENT_ROOT . '/core/lib/functions2.lib.php';
-
-    dol_include_once("/dolibarr_module_servicerestaurant/class/servicerestaurant.class.php");
-
-    global $db,$conf;
-
-    $servicerestaurant= new ControllerServiceRestaurant($db,$confs,$user);
-
-    ?>

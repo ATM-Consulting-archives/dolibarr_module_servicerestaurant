@@ -1,24 +1,37 @@
 <?php 
+
+	require('config.php');
+	require_once DOL_DOCUMENT_ROOT . '/core/lib/functions.lib.php';
+	require_once DOL_DOCUMENT_ROOT . '/core/lib/functions2.lib.php';
+	
+	dol_include_once('/product/class/product.class.php');
+	dol_include_once('/commande/class/commande.class.php');
+	
+	dol_include_once('/servicerestaurant/class/servicerestaurant.class.php');
+	
+	$langs->load('servicerestaurant@servicerestaurant'); // Charge les clés de traductions du module
+	$controllerServiceRestaurant = new ControllerServiceRestaurant($db,$conf,$user);
+	
     include_once('include/menu.php'); 
-    $action=GETPOST('action','alpha');
-    $fk_product=GETPOST('fk_product','int');
-    $fk_table=GETPOST('fk_table','int');
-    $fk_categorie=GETPOST('fk_categorie','int');
-    $button_table=$servicerestaurant->buttonBackToTablePage();
-    $button_dolibarr=$servicerestaurant->buttonLeaveModule();
-    $restaurantName=$servicerestaurant->getRestaurant()->description;
-    $categories=$servicerestaurant->getAllProductsCategories();
+    $action				= GETPOST('action','alpha');
+    $fk_product			= GETPOST('fk_product','int');
+    $fk_table			= GETPOST('fk_table','int');
+    $fk_categorie		= GETPOST('fk_categorie','int');
+    $button_table		= $controllerServiceRestaurant->buttonBackToTablePage();
+    $button_dolibarr	= $controllerServiceRestaurant->buttonLeaveModule();
+    $restaurantName		= $controllerServiceRestaurant->getRestaurant()->description;
+    $categories			= $controllerServiceRestaurant->getAllProductsCategories();
     if($action=='add')
     {
-        $servicerestaurant->addProduct($fk_table,$fk_product);
+        $controllerServiceRestaurant->addProduct($fk_table,$fk_product);
     }
     if($action=='rem')
     {
-        $servicerestaurant->removeProduct($fk_table,$fk_product);
+        $controllerServiceRestaurant->removeProduct($fk_table,$fk_product);
     }
     if($action=='valid')
     {
-        $servicerestaurant->validate_order($fk_table);
+        $controllerServiceRestaurant->validate_order($fk_table);
         header('Location:'.DOL_URL_ROOT.'/dolibarr_module_servicerestaurant/tables.php');
     }
 ?>
@@ -109,7 +122,7 @@
             <?php
             if($fk_categorie == 0) 
             {
-                $Tproduct=$servicerestaurant->getProductFromOrder($fk_table);
+                $Tproduct=$controllerServiceRestaurant->getProductFromOrder($fk_table);
                 foreach($Tproduct as $product_id)
                 {
                     $product=new Product($db);
@@ -124,7 +137,7 @@
                       <div class="col-lg-4 col-sm-12">
                         <h3 style="margin: 0px;"><?php echo $product->label; ?></h3>
                         <p><?php echo $product->description; ?></p>
-                        <p><br><b>Stock disponible : <input type="text" name="stock" value="<?php echo $productStock.' ('.($productStock-$servicerestaurant->getProductQuantityFromOrder($fk_table,$product->id))." restant(s))"; ?>" style="background-color: rgba(255,255,255,0); border: none;"></b></p>
+                        <p><br><b>Stock disponible : <input type="text" name="stock" value="<?php echo $productStock.' ('.($productStock-$controllerServiceRestaurant->getProductQuantityFromOrder($fk_table,$product->id))." restant(s))"; ?>" style="background-color: rgba(255,255,255,0); border: none;"></b></p>
                       </div>
                       <div class="col-lg-4 col-sm-12" style="height: 120px;">
                         <textarea style="margin: 0px; height: 120px; width: 100%; border: none; padding: 15px;" class="col-lg-12 infos-sup" name="name" rows="8" cols="80" placeholder="Ajouter des informations complémentaires"></textarea>
@@ -134,7 +147,7 @@
                           <a href="commande.php?fk_categorie=0&action=rem&fk_product=<?php echo $product->id; ?>&fk_table=<?php echo $fk_table; ?>">-</a>
                        </div>
                         <div class="col-lg-4 col-sm-4 count" style="background-color: white; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
-                            <?php echo $servicerestaurant->getProductQuantityFromOrder($fk_table,$product->id);?>
+                            <?php echo $controllerServiceRestaurant->getProductQuantityFromOrder($fk_table,$product->id);?>
                         </div>
                         <div id="plus" class="col-lg-4 col-sm-4 plus" style="cursor: pointer; background-color: #3c8eb9; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
                           <a href="commande.php?fk_categorie=0&action=add&fk_product=<?php echo $product->id; ?>&fk_table=<?php echo $fk_table; ?>">+</a>
@@ -148,7 +161,7 @@
             {
                 $categorie->fetch($cat);
                 if($fk_categorie == $categorie->id) {
-                    $Tproduct=$servicerestaurant->getAllProductByCategorie($fk_categorie);
+                    $Tproduct=$controllerServiceRestaurant->getAllProductByCategorie($fk_categorie);
                     foreach($Tproduct as $product_id)
                     {
                         $product=new Product($db);
@@ -163,7 +176,7 @@
                             <div class="col-lg-4 col-sm-12">
                                 <h3 style="margin: 0px;"><?php echo $product->label; ?></h3>
                                 <p><?php echo $product->description; ?></p>
-                                <p><br><b>Stock disponible : <input type="text" name="stock" value="<?php echo $productStock.' ('.($productStock-$servicerestaurant->getProductQuantityFromOrder($fk_table,$product->id))." restant(s))"; ?>" style="background-color: rgba(255,255,255,0); border: none;"></b></p>
+                                <p><br><b>Stock disponible : <input type="text" name="stock" value="<?php echo $productStock.' ('.($productStock-$controllerServiceRestaurant->getProductQuantityFromOrder($fk_table,$product->id))." restant(s))"; ?>" style="background-color: rgba(255,255,255,0); border: none;"></b></p>
                             </div>
                             <div class="col-lg-4 col-sm-12" style="height: 120px;">
                                 <textarea style="margin: 0px; height: 120px; width: 100%; border: none; padding: 15px;" class="col-lg-12 infos-sup" name="name" rows="8" cols="80" placeholder="Ajouter des informations complémentaires"></textarea>
@@ -173,7 +186,7 @@
                                         <a href="commande.php?fk_categorie=<?php echo $categorie->id; ?>&action=rem&fk_product=<?php echo $product->id; ?>&fk_table=<?php echo $fk_table; ?>">-</a>
                                 </div>
                                 <div class="col-lg-4 col-sm-4 count" style="background-color: white; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
-                                    <?php echo $servicerestaurant->getProductQuantityFromOrder($fk_table,$product->id);?>
+                                    <?php echo $controllerServiceRestaurant->getProductQuantityFromOrder($fk_table,$product->id);?>
                                 </div>
                                 <div id="plus" class="col-lg-4 col-sm-4 plus" style="cursor: pointer; background-color: #3c8eb9; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
                                     <a href="commande.php?fk_categorie=<?php echo $categorie->id; ?>&action=add&fk_product=<?php echo $product->id; ?>&fk_table=<?php echo $fk_table; ?>">+</a>

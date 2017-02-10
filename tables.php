@@ -1,4 +1,20 @@
-<?php include_once('include/menu.php'); ?>
+<?php 
+
+require('config.php');
+require_once DOL_DOCUMENT_ROOT . '/core/lib/functions.lib.php';
+require_once DOL_DOCUMENT_ROOT . '/core/lib/functions2.lib.php';
+
+dol_include_once('/product/class/product.class.php');
+dol_include_once('/commande/class/commande.class.php');
+
+dol_include_once('/servicerestaurant/class/servicerestaurant.class.php');
+
+$langs->load('servicerestaurant@servicerestaurant'); // Charge les clés de traductions du module
+$controllerServiceRestaurant = new ControllerServiceRestaurant($db,$conf,$user);
+
+include_once('include/menu.php');
+
+?>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -15,12 +31,12 @@
 
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" id="navbar">
-    <a class="navbar-brand" href="#"><?php echo $servicerestaurant->getRestaurant()->description; ?></a>
+    <a class="navbar-brand" href="#"><?php echo $controllerServiceRestaurant->getRestaurant()->description; ?></a>
       <a class="navbar-brand text-center" style="width: 80%;" href="#">Choisissez une table</a>
 
 
     <ul class="nav navbar-nav navbar-right">
-      <li><?php echo $servicerestaurant->buttonLeaveModule(); ?></li>
+      <li><?php echo $controllerServiceRestaurant->buttonLeaveModule(); ?></li>
     </ul>
   </div><!-- /.navbar-collapse -->
 </div><!-- /.container-fluid -->
@@ -72,7 +88,7 @@
       <div class="flux-cat col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 ">
         <div class="row">
           <div class="row">
-            <?php $servicerestaurant->showTables(); ?>
+            <?php $controllerServiceRestaurant->showTables(); ?>
           </div>
         </div>
       </div>
