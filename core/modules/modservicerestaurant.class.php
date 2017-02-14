@@ -193,7 +193,7 @@ class modservicerestaurant extends DolibarrModules
 									'titre'=>'servicerestaurant top menu',
 									'mainmenu'=>'servicerestaurant',
 									'leftmenu'=>'servicerestaurant',
-									'url'=>'/dolibarr_module_servicerestaurant/tables.php',
+									'url'=>'/servicerestaurant/tables.php',
 									'langs'=>'mylangfile@servicerestaurant',	        // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
 									'position'=>100,
 									'enabled'=>'$conf->servicerestaurant->enabled',	// Define condition to show or hide menu entry. Use '$conf->servicerestaurant->enabled' if entry must be visible if module is enabled.
@@ -254,7 +254,7 @@ class modservicerestaurant extends DolibarrModules
 		dol_include_once('/servicerestaurant/config.php');
 		dol_include_once('/servicerestaurant/script/create-maj-base.php');
                 
-                dol_include_once("/dolibarr_module_servicerestaurant/class/servicerestaurant.class.php");
+                dol_include_once("/servicerestaurant/class/servicerestaurant.class.php");
                 $servicerestaurant= new ControllerServiceRestaurant($this->db,$this->conf,$this->user); 
                 $servicerestaurant->init_test_game();
                 

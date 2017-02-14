@@ -7,7 +7,7 @@
 	dol_include_once('/product/class/product.class.php');
 	dol_include_once('/commande/class/commande.class.php');
 	
-	dol_include_once('/dolibarr_module_servicerestaurant/class/servicerestaurant.class.php');
+	dol_include_once('/servicerestaurant/class/servicerestaurant.class.php');
 	
 	$langs->load('servicerestaurant@servicerestaurant'); // Charge les clés de traductions du module
 	$controllerServiceRestaurant = new ControllerServiceRestaurant($db,$conf,$user);
@@ -32,7 +32,7 @@
     if($action=='valid')
     {
         $controllerServiceRestaurant->validate_order($fk_table);
-        header('Location:'.DOL_URL_ROOT.'/dolibarr_module_servicerestaurant/tables.php');
+        header('Location:'.dol_buildpath("/servicerestaurant/tables.php",1));
     }
 ?>
 

@@ -321,11 +321,6 @@ class ControllerServiceRestaurant
             }
         }
 
-        function buttonLeaveModule()
-        {
-            return "<a href='".DOL_URL_ROOT."'>Retour vers Dolibarr</a>";
-        }
-
         function showTables(){
                 $html='';
         	$tables=$this->getsAllTables();
@@ -493,8 +488,13 @@ class ControllerServiceRestaurant
             return 0;
         }
 
+        function buttonLeaveModule()
+        {
+            return "<a href='".DOL_URL_ROOT."'>Retour vers Dolibarr</a>";
+        }
+
         function buttonBackToTablePage()
         {
-            return "<a href='".DOL_URL_ROOT."/dolibarr_module_servicerestaurant/tables.php'>Retour vers la séléction des tables</a>";
+            return "<a href='".dol_buildpath("servicerestaurant/tables.php",1)."'>Retour vers la séléction des tables</a>";
         }
 }
