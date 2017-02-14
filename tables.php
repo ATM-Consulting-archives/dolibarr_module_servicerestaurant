@@ -7,7 +7,7 @@ require_once DOL_DOCUMENT_ROOT . '/core/lib/functions2.lib.php';
 dol_include_once('/product/class/product.class.php');
 dol_include_once('/commande/class/commande.class.php');
 
-dol_include_once('/servicerestaurant/class/servicerestaurant.class.php');
+dol_include_once('/dolibarr_module_servicerestaurant/class/servicerestaurant.class.php');
 
 $langs->load('servicerestaurant@servicerestaurant'); // Charge les clés de traductions du module
 $controllerServiceRestaurant = new ControllerServiceRestaurant($db,$conf,$user);
