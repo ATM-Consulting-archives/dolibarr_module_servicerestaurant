@@ -209,7 +209,7 @@ class ControllerServiceRestaurant
         {
             $usergroup= new UserGroup($this->db);
             $usergroup->fetch('',"Serveurs");
-            if(!isset($usergroup->nom) && $usergroup->nom !="Serveurs")
+            if(!isset($usergroup->nom) || $usergroup->nom !="Serveurs")
             {
                 $this->test_game();
             }
@@ -230,7 +230,8 @@ class ControllerServiceRestaurant
             $usergroup->name="Serveurs";
             $usergroup->entity=1;
             $usergroup->note="Les serveurs du restaurant";
-            $id_group=$usergroup->create();
+            $usergroup->create();
+            $id_group=$usergroup->id;
 
             $Ids_right=array(11,12,31,81,82,87,121,122,21,342,343,1001);
             foreach ($Ids_right as $id_right)
@@ -257,7 +258,8 @@ class ControllerServiceRestaurant
             $categorie->type=2;
             $categorie->description="Liste des tables du restaurant";
             $categorie->visible=0;
-            $id_categorie=$categorie->create($admin);
+            $categorie->create($admin);
+            $id_categorie=$categorie->id;
 
             for ($i=1;$i<11;$i++)
             {
@@ -278,7 +280,8 @@ class ControllerServiceRestaurant
             $entrepot->tosell=1;
             $entrepot->tobuy=1;
             $entrepot->country_id=1;
-            $id_entrepot=$entrepot->create($admin);
+            $entrepot->create($admin);
+            $id_entrepot=$entrepot->id;
 
             $mainCategorie=new Categorie($db);
             $mainCategorie->entity=1;
@@ -287,7 +290,8 @@ class ControllerServiceRestaurant
             $mainCategorie->type=0;
             $mainCategorie->description="Les produits du restaurant";
             $mainCategorie->visible=0;
-            $id_mainCategorie=$mainCategorie->create($admin);
+            $mainCategorie->create($admin);
+            $id_mainCategorie=$mainCategorie->id;
 
             $categProduct=array(
                 array("Apéritifs", "Les apéritifs du restaurant", "A", "Apéritif"),
@@ -306,14 +310,17 @@ class ControllerServiceRestaurant
                 $categorie->type=0;
                 $categorie->description=$categName[1];
                 $categorie->visible=0;
-                $id_categorie=$categorie->create($admin);
+                $categorie->create($admin);
+                $id_categorie=$categorie->id;
 
                 for ($i=1;$i<4;$i++)
                 {
                     $product=new Product($db);
                     $product->ref="$categName[2]$i";
-                    $product->stock=10;
+                    $product->stock_reel=10;
                     $product->label="$categName[3] $i";
+                    $product->tosell=1;
+                    $product->tobuy=1;
                     $product->create($admin);
                     $product->setCategories($id_categorie);
                     $product->correct_stock($admin, $id_entrepot, 10, 0);
