@@ -1,7 +1,5 @@
 <?php
 
-
-
 dol_include_once('/product/class/product.class.php');
 dol_include_once('/commande/class/commande.class.php');
 dol_include_once("/categories/class/categorie.class.php");
@@ -18,7 +16,6 @@ class ControllerServiceRestaurant
 	// Publics var
 	public $conf;
 	public $user;
-
 
 	/**
 	 *	Constructor
@@ -209,7 +206,10 @@ class ControllerServiceRestaurant
         {
             $usergroup= new UserGroup($this->db);
             $usergroup->fetch('',"Serveurs");
-            if(!isset($usergroup->nom) || $usergroup->nom !="Serveurs")
+            if(isset($usergroup->nom) && $usergroup->nom=="Serveurs")
+            {
+            }
+            else
             {
                 $this->test_game();
             }
@@ -277,8 +277,6 @@ class ControllerServiceRestaurant
             $entrepot->libelle="E1";
             $entrepot->description="Entrepot 1";
             $entrepot->statut=1;
-            $entrepot->tosell=1;
-            $entrepot->tobuy=1;
             $entrepot->country_id=1;
             $entrepot->create($admin);
             $id_entrepot=$entrepot->id;
@@ -288,7 +286,7 @@ class ControllerServiceRestaurant
             $mainCategorie->fk_parent=0;
             $mainCategorie->label="Restaurant";
             $mainCategorie->type=0;
-            $mainCategorie->description="Les produits du restaurant";
+            $mainCategorie->description="Nom du restaurant";
             $mainCategorie->visible=0;
             $mainCategorie->create($admin);
             $id_mainCategorie=$mainCategorie->id;
@@ -317,10 +315,10 @@ class ControllerServiceRestaurant
                 {
                     $product=new Product($db);
                     $product->ref="$categName[2]$i";
-                    $product->stock_reel=10;
                     $product->label="$categName[3] $i";
-                    $product->tosell=1;
-                    $product->tobuy=1;
+                    $product->status=1;
+                    $product->price=10;         
+                    $product->status_buy=1;
                     $product->create($admin);
                     $product->setCategories($id_categorie);
                     $product->correct_stock($admin, $id_entrepot, 10, 0);

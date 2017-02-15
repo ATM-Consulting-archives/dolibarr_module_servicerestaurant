@@ -15,8 +15,6 @@ global $db,$conf;
 
 $servicerestaurant= new ControllerServiceRestaurant($db,$confs,$user);
 
-$servicerestaurant->init_test_game();
-
 //$categ=$servicerestaurant->getAllProductsCategories();
 //echo "<br>".$servicerestaurant->getRestaurant()->description."<br>";
 //var_dump($categ);
