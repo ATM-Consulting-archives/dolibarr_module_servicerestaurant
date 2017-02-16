@@ -502,4 +502,16 @@ class ControllerServiceRestaurant
         {
             return "<a href='".dol_buildpath("servicerestaurant/tables.php",1)."'>Retour vers la séléction des tables</a>";
         }
+        
+        function getProductStock($id_product)
+        {
+            $sqlCommande='SELECT SUM(qty) from '.MAIN_DB_PREFIX.'commandedet where fk_product='.$id_product.';';
+            $stmtCommande=$this->db->query($sqlCommande);
+            if($stmtCommande->num_rows==0){return 0;}
+            foreach($stmtCommande as $row)
+            {
+                $stock=intval($row);
+            }
+            return $stock;
+        }
 }

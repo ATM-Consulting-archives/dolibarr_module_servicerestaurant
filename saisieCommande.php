@@ -14,6 +14,7 @@ echo "Bienvenu sur la saisie de commande";
 global $db,$conf;
 
 $servicerestaurant= new ControllerServiceRestaurant($db,$confs,$user);
+//echo $servicerestaurant->getProductStock(130);
 
 //$categ=$servicerestaurant->getAllProductsCategories();
 //echo "<br>".$servicerestaurant->getRestaurant()->description."<br>";
