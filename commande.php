@@ -78,7 +78,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar">
           <a class="navbar-brand" href="#"><?php echo $restaurantName; ?></a>
-            <a class="navbar-brand text-center" style="width: 80%;" href="#">Commande <?php echo $table_name;?></a>
+            <a class="navbar-brand text-center" style="width: 50%;" href="#">Commande <?php echo $table_name;?></a>
 
 
           <div class="nav navbar-nav navbar-right">
