@@ -21,6 +21,7 @@
     $button_dolibarr	= $controllerServiceRestaurant->buttonLeaveModule();
     $restaurantName		= $controllerServiceRestaurant->getRestaurant()->description;
     $categories			= $controllerServiceRestaurant->getAllProductsCategories();
+    $table_name=$controllerServiceRestaurant->getTableName($fk_table);
     if($action=='add')
     {
         $controllerServiceRestaurant->addProduct($fk_table,$fk_product);
@@ -77,10 +78,10 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar">
           <a class="navbar-brand" href="#"><?php echo $restaurantName; ?></a>
-            <a class="navbar-brand text-center" style="width: 80%;" href="#">Commande de la table N°<?php echo $fk_table;?></a>
+            <a class="navbar-brand text-center" style="width: 80%;" href="#">Commande <?php echo $table_name;?></a>
 
 
-          <ul class="nav navbar-nav navbar-right">
+          <div class="nav navbar-nav navbar-right">
             <li><?php echo $button_dolibarr ?></li>
             <li><?php echo $button_table; ?></li>
           </ul>
@@ -127,7 +128,8 @@
                 {
                     $product=new Product($db);
                     $product->fetch($product_id);
-                    $productStock=$product->stock_reel;
+                    $productStockReel=$product->stock_reel;
+                    $productStock=$controllerServiceRestaurant->getProductStock($product_id);
                     if(!is_numeric($productStock))
                     {
                         $productStock=0;
@@ -137,7 +139,7 @@
                       <div class="col-lg-4 col-sm-12">
                         <h3 style="margin: 0px;"><?php echo $product->label; ?></h3>
                         <p><?php echo $product->description; ?></p>
-                        <p><br><b>Stock disponible : <input type="text" name="stock" value="<?php echo $productStock.' ('.($productStock-$controllerServiceRestaurant->getProductQuantityFromOrder($fk_table,$product->id))." restant(s))"; ?>" style="background-color: rgba(255,255,255,0); border: none;"></b></p>
+                        <p><br><b>Stock disponible : <input type="text" name="stock" value="<?php echo $productStockReel.' ('.$productStock." restant(s))"; ?>" style="background-color: rgba(255,255,255,0); border: none;"></b></p>
                       </div>
                       <div class="col-lg-4 col-sm-12" style="height: 120px;">
                         <textarea style="margin: 0px; height: 120px; width: 100%; border: none; padding: 15px;" class="col-lg-12 infos-sup" name="name" rows="8" cols="80" placeholder="Ajouter des informations complémentaires"></textarea>
@@ -166,7 +168,8 @@
                     {
                         $product=new Product($db);
                         $product->fetch($product_id);
-                        $productStock=$product->stock_reel;
+                        $productStockReel=$product->stock_reel;
+                        $productStock=$controllerServiceRestaurant->getProductStock($product_id);
                         if(!is_numeric($productStock))
                         {
                             $productStock=0;
@@ -176,7 +179,7 @@
                             <div class="col-lg-4 col-sm-12">
                                 <h3 style="margin: 0px;"><?php echo $product->label; ?></h3>
                                 <p><?php echo $product->description; ?></p>
-                                <p><br><b>Stock disponible : <input type="text" name="stock" value="<?php echo $productStock.' ('.($productStock-$controllerServiceRestaurant->getProductQuantityFromOrder($fk_table,$product->id))." restant(s))"; ?>" style="background-color: rgba(255,255,255,0); border: none;"></b></p>
+                                <p><br><b>Stock disponible : <input type="text" name="stock" value="<?php echo $productStockReel.' ('.$productStock." restant(s))"; ?>" style="background-color: rgba(255,255,255,0); border: none;"></b></p>
                             </div>
                             <div class="col-lg-4 col-sm-12" style="height: 120px;">
                                 <textarea style="margin: 0px; height: 120px; width: 100%; border: none; padding: 15px;" class="col-lg-12 infos-sup" name="name" rows="8" cols="80" placeholder="Ajouter des informations complémentaires"></textarea>

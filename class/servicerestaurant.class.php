@@ -505,13 +505,24 @@ class ControllerServiceRestaurant
         
         function getProductStock($id_product)
         {
-            $sqlCommande='SELECT SUM(qty) from '.MAIN_DB_PREFIX.'commandedet where fk_product='.$id_product.';';
+            $sqlCommande='SELECT SUM(qty)as qty from '.MAIN_DB_PREFIX.'commandedet where fk_product='.$id_product.';';
             $stmtCommande=$this->db->query($sqlCommande);
             if($stmtCommande->num_rows==0){return 0;}
             foreach($stmtCommande as $row)
             {
-                $stock=intval($row);
+                $stockInOrders=$row;
             }
-            return $stock;
+            $product = new Product($this->db);
+            $error_product=$product->fetch($id_product);
+            if($error_product<0){ return 0;}
+            $StockInWareHouse=$product->stock_reel;
+            return $StockInWareHouse - $stockInOrders['qty'];
+        }
+        
+        function getTableName($id_table)
+        {
+            $table = new Societe($this->db);
+            $table ->fetch($id_table);
+            return $table->name;
         }
 }

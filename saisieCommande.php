@@ -10,11 +10,13 @@ require_once DOL_DOCUMENT_ROOT . '/core/lib/functions.lib.php';
 require_once DOL_DOCUMENT_ROOT . '/core/lib/functions2.lib.php';
 
 dol_include_once("/servicerestaurant/class/servicerestaurant.class.php");
-echo "Bienvenu sur la saisie de commande";
+echo "Bienvenu sur la saisie de commande<br>";
 global $db,$conf;
 
 $servicerestaurant= new ControllerServiceRestaurant($db,$confs,$user);
-//echo $servicerestaurant->getProductStock(130);
+$table_name=new Societe($db);
+$table_name->fetch(123);
+echo $table_name->name;
 
 //$categ=$servicerestaurant->getAllProductsCategories();
 //echo "<br>".$servicerestaurant->getRestaurant()->description."<br>";
@@ -92,7 +94,7 @@ foreach($T_id_product as $subC)
 
 
 
-echo $servicerestaurant->buttonLeaveModule()."<br>";
+echo "<br>".$servicerestaurant->buttonLeaveModule()."<br>";
 /*$all_cat=$servicerestaurant->getAllProductOrderByCategorie();
 foreach($all_cat as $cat)
 {
