@@ -81,7 +81,7 @@
             <a class="navbar-brand text-center" style="width: 50%;" href="#">Commande <?php echo $table_name;?></a>
 
 
-          <div class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav navbar-right">
             <li><?php echo $button_dolibarr ?></li>
             <li><?php echo $button_table; ?></li>
           </ul>
@@ -111,7 +111,7 @@
           </div>
 
           <!-- Bouton de confirmation en bas a droite-->
-          <div class="confirm">
+          <div class="confirm" onclick="Javascript:window.document.location.href='tables.php';">
 
           </div>
 

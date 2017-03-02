@@ -12,6 +12,8 @@ dol_include_once('/servicerestaurant/class/servicerestaurant.class.php');
 $langs->load('servicerestaurant@servicerestaurant'); // Charge les clés de traductions du module
 $controllerServiceRestaurant = new ControllerServiceRestaurant($db,$conf,$user);
 
+$button_dolibarr=$controllerServiceRestaurant->buttonLeaveModule();
+
 include_once('include/menu.php');
 
 ?>
@@ -32,11 +34,11 @@ include_once('include/menu.php');
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" id="navbar">
     <a class="navbar-brand" href="#"><?php echo $controllerServiceRestaurant->getRestaurant()->description; ?></a>
-      <a class="navbar-brand text-center" style="width: 80%;" href="#">Choisissez une table</a>
+      <a class="navbar-brand text-center" style="width: 50%;" href="#">Choisissez une table</a>
 
 
     <ul class="nav navbar-nav navbar-right">
-      <li><?php echo $controllerServiceRestaurant->buttonLeaveModule(); ?></li>
+      <li><?php echo $button_dolibarr; ?></li>
     </ul>
   </div><!-- /.navbar-collapse -->
 </div><!-- /.container-fluid -->
