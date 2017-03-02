@@ -38,7 +38,7 @@ include_once('include/menu.php');
 
 
     <ul class="nav navbar-nav navbar-right">
-      <li><?php echo $button_dolibarr; ?></li>
+      <li style="padding-top: 10%;"><?php echo $button_dolibarr; ?></li>
     </ul>
   </div><!-- /.navbar-collapse -->
 </div><!-- /.container-fluid -->

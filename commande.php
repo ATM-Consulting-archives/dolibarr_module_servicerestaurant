@@ -82,8 +82,8 @@
 
 
           <ul class="nav navbar-nav navbar-right">
-            <li><?php echo $button_dolibarr ?></li>
-            <li><?php echo $button_table; ?></li>
+            <li style="padding-top: 3%;"><?php echo $button_dolibarr ?></li>
+            <li style="padding-top: 3%;"><?php echo $button_table; ?></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
