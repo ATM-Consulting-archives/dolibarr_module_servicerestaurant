@@ -37,30 +37,6 @@
     }
 ?>
 
-      <style media="screen">
-      .confirm {
-        width: 125px;
-        height: 125px;
-        background-color: #3c8eb9;
-        position: fixed;
-        border-radius: 50%;
-        border: 15px solid #efefef;
-        bottom: 25px;
-        right: 25px;
-        z-index: 5000;
-        background-image: url('img/valid.png');
-        background-position: center;
-        background-size: 50%;
-        background-repeat: no-repeat;
-        cursor: pointer;
-        -moz-box-shadow: 1px 1px 5px 2px #cfcfcf;
-        -webkit-box-shadow: 1px 1px 5px 2px #cfcfcf;
-        -o-box-shadow: 1px 1px 5px 2px #cfcfcf;
-        box-shadow: 1px 1px 5px 2px #cfcfcf;
-        filter:progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=5);
-      }
-      </style>
-
       <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container-fluid">
           <div class="navbar-header">
@@ -108,11 +84,6 @@
               }
               ?>
             </ul>
-          </div>
-
-          <!-- Bouton de confirmation en bas a droite-->
-          <div class="confirm" onclick="Javascript:window.document.location.href='tables.php';">
-
           </div>
 
           <!-- Titre -->
@@ -202,12 +173,13 @@
             }
             ?>
             </div> <!-- All Products -->
-
+            
           </div>
       </div>
 
       <script src="less/dist/less.js" type="text/javascript"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+      <script src="<?php echo dol_buildpath("/core/js/jnotify.js",1); ?>"></script>
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript"></script>
       <!-- <script src="js/color.js"></script> -->
       <script src="js/cat.js"></script>

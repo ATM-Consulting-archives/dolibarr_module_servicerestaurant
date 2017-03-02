@@ -208,10 +208,12 @@ class ControllerServiceRestaurant
             $usergroup->fetch('',"Serveurs");
             if(isset($usergroup->nom) && $usergroup->nom=="Serveurs")
             {
+                setEventMessage("Jeu d'essai déjà existant","warnings");
             }
             else
             {
                 $this->test_game();
+                setEventMessage("Jeu d'essai généré");
             }
         }
 
@@ -387,6 +389,12 @@ class ControllerServiceRestaurant
             if($error_product<0)
             {
                 return -2;
+            }
+            $stock_current=$this->getProductStock($id_product);
+            if($stock_current<=0)
+            {
+                //setEventMessage("Stock nul","warnings");
+                return -3;
             }
             foreach($commande->lines as $line)
             {
