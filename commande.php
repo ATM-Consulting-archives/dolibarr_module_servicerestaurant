@@ -85,8 +85,9 @@
             {
                 $categorie=new Categorie($db);
                 $categorie->fetch($cat);
+                $id_categorie=$categorie->id;
                 $label_categorie=$categorie->label;
-                echo "<a href=\"commande.php?fk_categorie=$cat&fk_table=$fk_table\" name=\"$fk_categorie\"><li>$label_categorie</li></a>";
+                echo "<a href=\"commande.php?fk_categorie=$cat&fk_table=$fk_table\" name=\"$id_categorie\"><li>$label_categorie</li></a>";
             }
             ?>
             </ul>
@@ -107,9 +108,10 @@
                     $product->fetch($product_id);
                     $productStockReel=$product->stock_reel;
                     $productStock=$controllerServiceRestaurant->getProductStock($product_id);
-                    $productQtyFromOrder=$controllerServiceRestaurant->getProductQuantityFromOrder($fk_table,$product_id);
                     $label_product=$product->label;
                     $description_product=$product->description;
+                    $id_product=$product->id;
+                    $productQtyFromOrder=$controllerServiceRestaurant->getProductQuantityFromOrder($fk_table,$id_product);
                     if(!is_numeric($productStock))
                     {
                         $productStock=0;
@@ -138,13 +140,13 @@
                       </div>
                       <div class="col-lg-4 col-sm-12">
                         <div class="col-lg-4 col-sm-4 moins" style="cursor: pointer; background-color: #3c8eb9; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
-                          <a href="commande.php?fk_categorie=0&action=rem&fk_product=<?php echo $product_id; ?>&fk_table=<?php echo $fk_table; ?>">-</a>
+                          <a href="commande.php?fk_categorie=0&action=rem&fk_product=<?php echo $id_product; ?>&fk_table=<?php echo $fk_table; ?>">-</a>
                        </div>
                         <div class="col-lg-4 col-sm-4 count" style="background-color: white; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
                             <?php echo $productQtyFromOrder;?>
                         </div>
                         <div id="plus" class="col-lg-4 col-sm-4 plus" style="cursor: pointer; background-color: #3c8eb9; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
-                          <a href="commande.php?fk_categorie=0&action=add&fk_product=<?php echo $product_id; ?>&fk_table=<?php echo $fk_table; ?>">+</a>
+                          <a href="commande.php?fk_categorie=0&action=add&fk_product=<?php echo $id_product; ?>&fk_table=<?php echo $fk_table; ?>">+</a>
                         </div>
                       </div>
                     </section>
@@ -154,7 +156,7 @@
             foreach($categories as $cat)
             {
                 $categorie->fetch($cat);
-                if($fk_categorie == $fk_categorie) {
+                if($fk_categorie == $categorie->id) {
                     $Tproduct=$controllerServiceRestaurant->getAllProductByCategorie($fk_categorie);
                     foreach($Tproduct as $product_id)
                     {
@@ -162,9 +164,10 @@
                         $product->fetch($product_id);
                         $productStockReel=$product->stock_reel;
                         $productStock=$controllerServiceRestaurant->getProductStock($product_id);
-                        $productQtyFromOrder=$controllerServiceRestaurant->getProductQuantityFromOrder($fk_table,$product_id);
                         $label_product=$product->label;
                         $description_product=$product->description;
+                        $id_product=$product->id;
+                        $productQtyFromOrder=$controllerServiceRestaurant->getProductQuantityFromOrder($fk_table,$id_product);
                         if(!is_numeric($productStock))
                         {
                             $productStock=0;
@@ -180,7 +183,7 @@
                         ?> 
                             <div class="col-lg-4 col-sm-12">
                                 <h3 style="margin: 0px;"><?php echo $label_product; ?></h3>
-                                <p><?php echo $description_products; ?></p>
+                                <p><?php echo $description_product; ?></p>
                                 <p><br><b>Stock disponible : <input type="text" name="stock" value="<?php echo $productStockReel.' ('.$productStock." restant(s))"; ?>" style="background-color: rgba(255,255,255,0); border: none;"></b></p>
                             </div>
                             <div class="col-lg-4 col-sm-12" style="height: 120px;">
@@ -193,13 +196,13 @@
                             </div>
                             <div class="col-lg-4 col-sm-12">
                                 <div class="col-lg-4 col-sm-4 moins" style="cursor: pointer; background-color: #3c8eb9; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
-                                        <a href="commande.php?fk_categorie=<?php echo $fk_categorie; ?>&action=rem&fk_product=<?php echo $product_id; ?>&fk_table=<?php echo $fk_table; ?>">-</a>
+                                        <a href="commande.php?fk_categorie=<?php echo $fk_categorie; ?>&action=rem&fk_product=<?php echo $id_product; ?>&fk_table=<?php echo $fk_table; ?>">-</a>
                                 </div>
                                 <div class="col-lg-4 col-sm-4 count" style="background-color: white; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
                                     <?php echo $productQtyFromOrder;?>
                                 </div>
                                 <div id="plus" class="col-lg-4 col-sm-4 plus" style="cursor: pointer; background-color: #3c8eb9; height: 120px; font-size: 5vmin; text-align: center; vertical-align: middle; line-height: 120px;">
-                                    <a href="commande.php?fk_categorie=<?php echo $fk_categorie; ?>&action=add&fk_product=<?php echo $product_id; ?>&fk_table=<?php echo $fk_table; ?>">+</a>
+                                    <a href="commande.php?fk_categorie=<?php echo $fk_categorie; ?>&action=add&fk_product=<?php echo $id_product; ?>&fk_table=<?php echo $fk_table; ?>">+</a>
                                 </div>
                             </div>
                         </section>
