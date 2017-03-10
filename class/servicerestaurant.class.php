@@ -7,7 +7,6 @@ dol_include_once("/user/class/user.class.php");
 dol_include_once("/societe/class/client.class.php");
 dol_include_once("/user/class/usergroup.class.php");
 dol_include_once("/product/stock/class/entrepot.class.php");
-dol_include_once("/core/lib/functions.lib.php");
 
 class ControllerServiceRestaurant
 {
@@ -350,7 +349,7 @@ class ControllerServiceRestaurant
                             </div>
                         </div>";
         	}
-                echo $html;
+                return $html;
 
         }
         /**

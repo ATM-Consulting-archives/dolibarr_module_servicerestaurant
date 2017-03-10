@@ -180,7 +180,7 @@
                         ?> 
                             <div class="col-lg-4 col-sm-12">
                                 <h3 style="margin: 0px;"><?php echo $label_product; ?></h3>
-                                <p><?php echo $description_product; ?></p>
+                                <p><?php echo $description_products; ?></p>
                                 <p><br><b>Stock disponible : <input type="text" name="stock" value="<?php echo $productStockReel.' ('.$productStock." restant(s))"; ?>" style="background-color: rgba(255,255,255,0); border: none;"></b></p>
                             </div>
                             <div class="col-lg-4 col-sm-12" style="height: 120px;">

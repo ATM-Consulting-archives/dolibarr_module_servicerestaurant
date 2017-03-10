@@ -12,7 +12,7 @@ dol_include_once('/servicerestaurant/class/servicerestaurant.class.php');
 $langs->load('servicerestaurant@servicerestaurant'); // Charge les clés de traductions du module
 $controllerServiceRestaurant = new ControllerServiceRestaurant($db,$conf,$user);
 
-$tables=$controllerServiceRestaurant->showTables();
+$lesTables=$controllerServiceRestaurant->showTables();
 $button_dolibarr=$controllerServiceRestaurant->buttonLeaveModule();
 
 include_once('include/menu.php');
@@ -91,7 +91,7 @@ include_once('include/menu.php');
       <div class="flux-cat col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 ">
         <div class="row">
           <div class="row">
-            <?php $tables; ?>
+            <?php echo $lesTables; ?>
           </div>
         </div>
       </div>
