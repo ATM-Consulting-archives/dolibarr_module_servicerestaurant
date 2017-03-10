@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require('config.php');
 require_once DOL_DOCUMENT_ROOT . '/core/lib/functions.lib.php';
@@ -33,14 +33,10 @@ include_once('include/menu.php');
     </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
-  <div class="collapse navbar-collapse" id="navbar">
-    <a class="navbar-brand" href="#"><?php echo $controllerServiceRestaurant->getRestaurant()->description; ?></a>
-      <a class="navbar-brand text-center" style="width: 50%;" href="#">Choisissez une table</a>
-
-
-    <ul class="nav navbar-nav navbar-right">
-      <li style="padding-top: 10%;"><?php echo $button_dolibarr; ?></li>
-    </ul>
+  <div class="collapse navbar-collapse row" id="navbar">
+    <a class="navbar-brand col-lg-4 col-md-4 col-sm-4 col-xs-12" href="#"><?php echo $controllerServiceRestaurant->getRestaurant()->description; ?></a>
+    <a class="navbar-brand text-center col-lg-4 col-md-4 col-sm-4 col-xs-12" href="#">Choisissez une table</a>
+    <?php echo $button_dolibarr; ?>
   </div><!-- /.navbar-collapse -->
 </div><!-- /.container-fluid -->
 </nav>
@@ -76,24 +72,20 @@ include_once('include/menu.php');
 
 
       <!-- Légende couleurs -->
-      <div class="row">
-        <div class="col-lg-10 col-lg-offset-1 legend" style=" margin-top: 100px;">
-          <div class="col-lg-6 text-center occupe">
-            <p>Occupé</p>
-          </div>
-          <div class="col-lg-6 text-center libre">
-            <p>Libre</p>
-          </div>
+      <div class="col-lg-10 col-lg-offset-1 legend" style=" margin-top: 100px;">
+        <div class="col-lg-6 text-center occupe">
+          <p>Occupé</p>
+        </div>
+        <div class="col-lg-6 text-center libre">
+          <p>Libre</p>
         </div>
       </div>
 
       <!-- Liste de tables -->
-      <div class="flux-cat col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 ">
-        <div class="row">
+      <div class="flux col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 ">
           <div class="row">
             <?php echo $lesTables; ?>
           </div>
-        </div>
       </div>
 
     <script src="less/dist/less.js" type="text/javascript"></script>

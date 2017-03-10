@@ -319,7 +319,7 @@ class ControllerServiceRestaurant
                     $product->ref="$categName[2]$i";
                     $product->label="$categName[3] $i";
                     $product->status=1;
-                    $product->price=10;         
+                    $product->price=10;
                     $product->status_buy=1;
                     $product->create($admin);
                     $product->setCategories($id_categorie);
@@ -340,7 +340,7 @@ class ControllerServiceRestaurant
                     {
                         $html.= "<div class=\"container-square\" name=\"occupe\">";
                     }
-                    $html.="<div class=\"square\" style=\"background-size: cover;\">
+                    $html.="<div class=\"square\" >
                                 <a href=\"#\" data-toggle=\"modal\" data-target=\"\" id=\"table_".$tab->id."\" class=\"table\">
                                     <div class=\"square__content\">
                                         $tab->name
@@ -503,14 +503,14 @@ class ControllerServiceRestaurant
 
         function buttonLeaveModule()
         {
-            return "<a href='".DOL_URL_ROOT."'>Retour vers Dolibarr</a>";
+            return "<a class=\"navbar-brand retour col-lg-4 col-md-4 col-sm-4\" href='".DOL_URL_ROOT."'>Retour vers Dolibarr</a>";
         }
 
         function buttonBackToTablePage()
         {
-            return "<a href='".dol_buildpath("servicerestaurant/tables.php",1)."'>Retour vers la séléction des tables</a>";
+            return "<a class=\"navbar-brand retour col-lg-3 col-md-3 col-sm-3\" href='".dol_buildpath("servicerestaurant/tables.php",1)."'>Retour aux tables</a>";
         }
-        
+
         function getProductStock($id_product)
         {
             $sqlCommande='SELECT SUM(qty)as qty from '.MAIN_DB_PREFIX.'commandedet where fk_product='.$id_product.';';
@@ -526,7 +526,7 @@ class ControllerServiceRestaurant
             $StockInWareHouse=$product->stock_reel;
             return $StockInWareHouse - $stockInOrders['qty'];
         }
-        
+
         function getTableName($id_table)
         {
             $table = new Societe($this->db);

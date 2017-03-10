@@ -68,7 +68,7 @@ h2 {
 }
 //Menu
 .navbar-default {
-  background-color: @main-color !important;
+  background-color: @main-color;
   border-radius: 0px 0px 0px 0px !important;
   border: none;
   a {
@@ -260,4 +260,68 @@ label {
   left: 260px;
   background-image: url("../img/menu.png");
   .transition;
+}
+#navbar {
+  width: 100%;
+  display: table;
+}
+#navbar > a {
+	display: table-cell;
+}
+.titre {
+  background-color: red;
+}
+.retour {
+  text-align: right;
+}
+
+.count {
+  background-color: white;
+  height: 120px;
+  font-size: 5vmin;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 120px;
+}
+.link-boutons {
+  color: white;
+  text-decoration: none;
+  &:hover {
+    color: white;
+  }
+  .boutons {
+    cursor: pointer;
+    background-color: #3c8eb9;
+    height: 120px;
+    font-size: 5vmin;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 120px;
+  }
+}
+.infos-sup {
+  margin: 0px;
+  height: 120px;
+  width: 100%;
+  border: none;
+  padding: 15px;
+}
+.produits-out {
+  .produits;
+  background-color: #ea1c1c !important;
+  color: #ccc !important;
+}
+.produits {
+  height: auto;
+  margin-bottom: 50px;
+  background-color: #d1d5d8 !important;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 20px;
+  div {
+    h3 {
+      margin: 0px;
+    }
+  }
 }
