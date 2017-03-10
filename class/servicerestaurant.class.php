@@ -7,6 +7,7 @@ dol_include_once("/user/class/user.class.php");
 dol_include_once("/societe/class/client.class.php");
 dol_include_once("/user/class/usergroup.class.php");
 dol_include_once("/product/stock/class/entrepot.class.php");
+dol_include_once("/core/lib/functions.lib.php");
 
 class ControllerServiceRestaurant
 {
@@ -393,7 +394,7 @@ class ControllerServiceRestaurant
             $stock_current=$this->getProductStock($id_product);
             if($stock_current<=0)
             {
-                //setEventMessage("Stock nul","warnings");
+                setEventMessage("Stock nul","warnings");
                 return -3;
             }
             foreach($commande->lines as $line)
