@@ -181,7 +181,9 @@ class ControllerServiceRestaurant
                 return ($res);
             }
             return $res;
-        }/**
+        }
+        
+        /**
 	 *	Function getAllProductOrderByCategorie
          *
 	 *
@@ -352,6 +354,7 @@ class ControllerServiceRestaurant
                 return $html;
 
         }
+        
         /**
          * @return all the tables in an array
          */
@@ -364,6 +367,7 @@ class ControllerServiceRestaurant
             return $T_Table;
 
         }
+        
         /**
          *
          * @param $table_id id of table

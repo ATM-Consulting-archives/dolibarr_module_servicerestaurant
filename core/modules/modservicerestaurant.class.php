@@ -1,4 +1,4 @@
-<?php
+    <?php
 /* Copyright (C) 2003      Rodolphe Quiedeville <rodolphe@quiedeville.org>
  * Copyright (C) 2004-2012 Laurent Destailleur  <eldy@users.sourceforge.net>
  * Copyright (C) 2005-2012 Regis Houssin        <regis.houssin@capnetworks.com>
@@ -190,7 +190,7 @@ class modservicerestaurant extends DolibarrModules
 		// Example to declare a new Top Menu entry and its Left menu entry:
 		 $this->menu[$r]=array(	'fk_menu'=>0,			                // Put 0 if this is a top menu
 									'type'=>'top',			                // This is a Top menu entry
-									'titre'=>'servicerestaurant top menu',
+									'titre'=>'Restaurant',
 									'mainmenu'=>'servicerestaurant',
 									'leftmenu'=>'servicerestaurant',
 									'url'=>'/servicerestaurant/tables.php',
