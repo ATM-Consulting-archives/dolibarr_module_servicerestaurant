@@ -45,7 +45,7 @@ class ControllerServiceRestaurant
                 $commande->socid=$table_id;
                 $commande->date=time();
                 $commande->create($this->user);
-                return $commande->rowid;
+                return $commande->id;
             }
             else
             {
@@ -127,7 +127,7 @@ class ControllerServiceRestaurant
             $cat_error=$restaurant->fetch('', "Restaurant");
             if($cat_error>0)
             {
-                return $restaurant;
+                return $restaurant->id;
             }
             else
             {
@@ -159,7 +159,7 @@ class ControllerServiceRestaurant
         }
 
         /**
-	 *	Function getAllProductsCategories
+	 *	Function getAllProductByCategorie
          * @param       $id_categorie             Categorie		Dolibarr Categorie Object
          *
 	 *
@@ -182,27 +182,6 @@ class ControllerServiceRestaurant
             }
             return $res;
         }
-        
-        /**
-	 *	Function getAllProductOrderByCategorie
-         *
-	 *
-	 * @return	array() with all rowid of products of the restaurant
-	 */
-        function getAllProductOrderByCategorie()
-        {
-            $res=array();
-            $Tcategorie_restaurant=$this->getAllProductsCategories();
-            foreach($Tcategorie_restaurant as $id_categorie)
-            {
-                $Tid_categorie=$this->getAllProductByCategorie($id_categorie);
-                foreach($Tid_categorie as $id_product_by_categorie)
-                {
-                    $res[]=$id_product_by_categorie;
-                }
-            }
-            return $res;
-        }
 
         function init_test_game()
         {
@@ -211,11 +190,13 @@ class ControllerServiceRestaurant
             if(isset($usergroup->nom) && $usergroup->nom=="Serveurs")
             {
                 setEventMessage("Jeu d'essai déjà existant","warnings");
+                return 1;
             }
             else
             {
                 $this->test_game();
                 setEventMessage("Jeu d'essai généré");
+                return 2;
             }
         }
 
@@ -417,7 +398,7 @@ class ControllerServiceRestaurant
          * @param $table_id id of table
          * @param $id_product  id of the product we remove from the order
          *
-	 * @return	int		(0 < error, 0 <= OK)
+	 * @return	int		(0 < error, 0 >= OK)
          */
         function removeProduct($table_id,$id_product)
         {
