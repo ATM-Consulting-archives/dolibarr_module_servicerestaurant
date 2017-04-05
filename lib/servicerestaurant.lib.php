@@ -23,6 +23,10 @@
  *				Put some comments here
  */
 
+
+dol_include_once('class/api_contact.class.php');
+dol_include_once('class/api_commande.class.php');
+
 function servicerestaurantAdminPrepareHead()
 {
     global $langs, $conf;
@@ -53,3 +57,76 @@ function servicerestaurantAdminPrepareHead()
 
     return $head;
 }
+
+/**
+ * @return all the tables in an array
+ */
+
+function getsAllTables(){
+	$tables=getList();
+	
+	return $tables;
+	
+}
+
+
+function showTables(){
+	$tables=getAllTables();
+	foreach ($tables as $tab){
+		echo"<input type='button' name='".$tab->name."' value='".$tab->name."' onclick='".Order()."' >";
+	}
+
+}
+
+function validateOrder($id){
+	validOrder($id);
+
+}
+/**
+ * 
+ * @param $idcommande id of order
+ * @param $idproduct  id of the product we add to the order
+ */
+function addProduct($idord, $idproduct){
+	if(!getLines($idord)){
+		post($idord);
+	}
+	if(!getLine($idord,$idproduct)){
+	postLine($idord, $idproduct);}
+	else{
+		$prod=get($idord,$idproduct);
+		$prod->qty=$prod->qty+1;
+		putLine($idord,$idproduct,$prod);
+	}
+}
+
+/**
+ *
+ * @param $idcommande id of order
+ * @param $idproduct  id of the product we remove from the order
+ */
+function removeProduct($idord,$idprod){
+	if(getLine($idord,$idprod)){
+		$product=getLine($idord,$idprod);
+		if($product->qty>1){
+			$product->qty=$product->qty-1;
+			putLine($idord,$idproduct,$product);
+			return $product->qty;
+		}
+		else{delLine($idord,$idprod);
+		}
+	}
+	return 0;
+}
+
+/**
+ * to add a line use: dol_include_once('class/api_commande.class.php'); use function postLine($idcommande)
+ */
+	
+/**
+ * to remove a line use function delLine($idcommande,$idLine);
+ */
+ 
+/**
+ * to modify a quantity use postLine($idcommande, $newquantity);
+ */

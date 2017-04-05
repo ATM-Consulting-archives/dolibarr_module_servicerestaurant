@@ -17,3 +17,5 @@
  */
 
 
+<h1>Module permettant la gestion des services pour un Restaurant</h1>
+<p>Ce module permet le choix d'une table pour démarrer ,modifier,supprimer une commande. L'interface est agrémentée d'un choix de produits (entrées, plats, desserts ...)</p>

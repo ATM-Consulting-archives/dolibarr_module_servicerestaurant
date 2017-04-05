@@ -1,4 +1,4 @@
-<?php
+    <?php
 /* Copyright (C) 2003      Rodolphe Quiedeville <rodolphe@quiedeville.org>
  * Copyright (C) 2004-2012 Laurent Destailleur  <eldy@users.sourceforge.net>
  * Copyright (C) 2005-2012 Regis Houssin        <regis.houssin@capnetworks.com>
@@ -98,7 +98,7 @@ class modservicerestaurant extends DolibarrModules
 
 		// Dependencies
 		$this->hidden = false;			// A condition to hide module
-		$this->depends = array();		// List of modules id that must be enabled if this module is enabled
+		$this->depends = array("modCategorie","modCommande","modFacture","modStock","modProduct");		// List of modules id that must be enabled if this module is enabled
 		$this->requiredby = array();	// List of modules id to disable if this one is disabled
 		$this->conflictwith = array();	// List of modules id this module is in conflict with
 		$this->phpmin = array(5,0);					// Minimum version of PHP required by module
@@ -173,10 +173,10 @@ class modservicerestaurant extends DolibarrModules
 
 		// Add here list of permission defined by an id, a label, a boolean and two constant strings.
 		// Example:
-		// $this->rights[$r][0] = $this->numero . $r;	// Permission id (must not be already used)
-		// $this->rights[$r][1] = 'Permision label';	// Permission label
-		// $this->rights[$r][3] = 1; 					// Permission by default for new user (0/1)
-		// $this->rights[$r][4] = 'level1';				// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
+		$this->rights[$r][0] = $this->numero . $r;	// Permission id (must not be already used)
+		$this->rights[$r][1] = 'Permision label';	// Permission label
+		$this->rights[$r][3] = 1; 					// Permission by default for new user (0/1)
+		$this->rights[$r][4] = 'level1';				// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
 		// $this->rights[$r][5] = 'level2';				// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
 		// $r++;
 
@@ -188,19 +188,20 @@ class modservicerestaurant extends DolibarrModules
 		// Add here entries to declare new menus
 		//
 		// Example to declare a new Top Menu entry and its Left menu entry:
-		// $this->menu[$r]=array(	'fk_menu'=>0,			                // Put 0 if this is a top menu
-		//							'type'=>'top',			                // This is a Top menu entry
-		//							'titre'=>'servicerestaurant top menu',
-		//							'mainmenu'=>'servicerestaurant',
-		//							'leftmenu'=>'servicerestaurant',
-		//							'url'=>'/servicerestaurant/pagetop.php',
-		//							'langs'=>'mylangfile@servicerestaurant',	        // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
-		//							'position'=>100,
-		//							'enabled'=>'$conf->servicerestaurant->enabled',	// Define condition to show or hide menu entry. Use '$conf->servicerestaurant->enabled' if entry must be visible if module is enabled.
+		 $this->menu[$r]=array(	'fk_menu'=>0,			                // Put 0 if this is a top menu
+									'type'=>'top',			                // This is a Top menu entry
+									'titre'=>'Restaurant',
+									'mainmenu'=>'servicerestaurant',
+									'leftmenu'=>'servicerestaurant',
+									'url'=>'/servicerestaurant/tables.php',
+									'langs'=>'mylangfile@servicerestaurant',	        // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
+									'position'=>100,
+									'enabled'=>'$conf->servicerestaurant->enabled',	// Define condition to show or hide menu entry. Use '$conf->servicerestaurant->enabled' if entry must be visible if module is enabled.
 		//							'perms'=>'1',			                // Use 'perms'=>'$user->rights->servicerestaurant->level1->level2' if you want your menu with a permission rules
-		//							'target'=>'',
+									'target'=>'',
 		//							'user'=>2);				                // 0=Menu for internal users, 1=external users, 2=both
-		// $r++;
+		);
+                $r++;
 		//
 		// Example to declare a Left Menu entry into an existing Top menu entry:
 		// $this->menu[$r]=array(	'fk_menu'=>'fk_mainmenu=xxx',		    // Use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
@@ -252,7 +253,11 @@ class modservicerestaurant extends DolibarrModules
 
 		dol_include_once('/servicerestaurant/config.php');
 		dol_include_once('/servicerestaurant/script/create-maj-base.php');
-
+                
+                dol_include_once("/servicerestaurant/class/servicerestaurant.class.php");
+                $servicerestaurant= new ControllerServiceRestaurant($this->db,$this->conf,$this->user); 
+                $servicerestaurant->init_test_game();
+                
 		$result=$this->_load_tables('/servicerestaurant/sql/');
 
 		return $this->_init($sql, $options);
