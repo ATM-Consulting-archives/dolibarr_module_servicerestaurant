@@ -49,7 +49,7 @@ class ControllerServiceRestaurant
             }
             else
             {
-                echo "Une commande est déjà en cour de saisie sur cette table. ";
+                echo "Une commande est déjà en cours de saisie sur cette table. ";
                 return 0;
             }
 	}
